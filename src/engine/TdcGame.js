@@ -1,46 +1,19 @@
+import World from '../engine/World.js';
 export default class TdcGame {
 
     constructor() {
-        this.world = {
-
-            width: 0,
-            height: 0,
-
-            player: {
-                x: 0,
-                y: 0,
-                object: true,
-            },
-            finish: {
-                x: 0,
-                y: 0,
-                object: true,
-            },
-            getAllObjects() {
-                let objects = [];
-                for (let worldKey in this) {
-                    if (this[worldKey].object === true) {
-                        objects.push (this[worldKey]);
-                    }
-                }
-                return objects;
-            }
-        };
+        this.world = new World();
     }
 
     setSizeWorld(width, height) {
-        this.world.width = width;
-        this.world.height = height;
+        this.world.setSizeWorld (width,height);
     }
 
     setPlayerPosition(x, y) {
-        this.world.player.x = x;
-        this.world.player.y = y;
+        this.world.setPlayerPosition(x, y);
     }
 
     setFinishPosition(x, y) {
-        this.world.finish.x = x;
-        this.world.finish.y = y;
+        this.world.setFinishPosition(x, y);
     }
-
 }
