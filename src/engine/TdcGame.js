@@ -2,16 +2,29 @@ export default class TdcGame {
 
     constructor() {
         this.world = {
+
             width: 0,
             height: 0,
-        };
-        this.player = {
-            x: 0,
-            y: 0,
-        };
-        this.finish = {
-            x: 0,
-            y: 0,
+
+            player: {
+                x: 0,
+                y: 0,
+                object: true,
+            },
+            finish: {
+                x: 0,
+                y: 0,
+                object: true,
+            },
+            getAllObjects() {
+                let objects = [];
+                for (let worldKey in this) {
+                    if (this[worldKey].object === true) {
+                        objects.push (this[worldKey]);
+                    }
+                }
+                return objects;
+            }
         };
     }
 
@@ -21,12 +34,13 @@ export default class TdcGame {
     }
 
     setPlayerPosition(x, y) {
-        this.player.x = x;
-        this.player.y = y;
-    };
+        this.world.player.x = x;
+        this.world.player.y = y;
+    }
 
     setFinishPosition(x, y) {
-        this.finish.x = x;
-        this.finish.y = y;
+        this.world.finish.x = x;
+        this.world.finish.y = y;
     }
+
 }
