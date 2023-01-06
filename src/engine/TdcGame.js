@@ -1,14 +1,29 @@
 export default class TdcGame {
 
-    constructor(width, height) {
-        this.width = 0;
-        this.height = 0;
-
+    constructor() {
+        this.world = {};
+        this.player = {};
+        this.finish = {};
     }
 
-    createWorld (width, height) {
-        let world;
-        return world.rect(0,0,width, height);
+    createWorld(width, height) {
+        this.world = {
+            width: width,
+            height: height,
+        };
     }
 
+    setPlayerPosition(x, y) {
+        this.player = {
+            x: x,
+            y: y,
+        }
+    };
+
+    setFinishPosition(x, y) {
+        this.finish = {
+            x: x,
+            y: y,
+        }
+    };
 }
