@@ -7,7 +7,12 @@ export default class HtmlTdcGame {
 
         // game.loadLevelFromJson(level1);
 
+        console.log(game.world);
+
         game.createWorld(5, 5);
+
+        console.log(game.world);
+
         game.setPlayerPosition(1, 1);
         game.setFinishPosition(5, 5);
 
