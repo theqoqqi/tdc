@@ -10,7 +10,7 @@ export default class HtmlTdcGame {
 
         console.log(game.world);
 
-        game.createWorld(5, 5);
+        game.setSizeWorld(5, 5);
 
         console.log(game.world);
 
