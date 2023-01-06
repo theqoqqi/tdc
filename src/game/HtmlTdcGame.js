@@ -21,6 +21,7 @@ export default class HtmlTdcGame {
     }
 
     renderWorld(world) {
+        this.clearWorld();
         this.renderTerrain(world);
         this.renderObjects(world.getAllObjects());
     }
@@ -47,7 +48,20 @@ export default class HtmlTdcGame {
         this.renderTile(object.x, object.y, 'player.png'); // TODO: Или finish.png и т.д.
     }
 
+    clearWorld() {
+        $('.world .terrain').empty();
+        $('.world .objects').empty();
+    }
+
     renderTile(x, y, texture) {
-        // TODO: отображать картинку
+        let $tile = $(`<div class='grid-item'>`);
+
+        $tile.css({
+            left: (x - 1) * 64 + 'px',
+            top: (y - 1) * 64 + 'px',
+            backgroundImage: `url('assets/images/${texture}')`,
+        });
+
+        $('.world .terrain').append($tile);
     }
 }
