@@ -1,10 +1,10 @@
+import level1 from './levels/level1';
 
 export default class HtmlTdcGame {
 
     constructor() {
         let game = new TdcGame();
-        let levelJson = {};
 
-        game.loadLevelFromJson(levelJson);
+        game.loadLevelFromJson(level1);
     }
 }
