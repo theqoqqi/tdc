@@ -1,3 +1,3 @@
-import HtmlTdcGame from './game/HtmlTdcGame';
+import HtmlTdcGame from './game/HtmlTdcGame.js';
 
 new HtmlTdcGame();

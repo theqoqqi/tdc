@@ -1,4 +1,4 @@
-import level1 from './levels/level1';
+import level1 from './levels/level1.js';
 
 export default class HtmlTdcGame {
 
