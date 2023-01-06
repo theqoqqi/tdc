@@ -1,4 +1,5 @@
 import level1 from './levels/level1.js';
+import TdcGame from '../engine/TdcGame.js';
 
 export default class HtmlTdcGame {
 
