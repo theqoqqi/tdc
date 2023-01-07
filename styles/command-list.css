@@ -1,0 +1,20 @@
+
+.command-list {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+
+    flex: 1;
+}
+
+.command {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+
+    width: 160px;
+    height: 32px;
+    padding: 0 8px;
+
+    background-image: url('../assets/images/gui/command.png');
+}
