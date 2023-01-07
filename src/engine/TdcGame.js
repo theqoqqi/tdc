@@ -45,9 +45,12 @@ export default class TdcGame {
         this.unusedCommandsList.removeCommand(command);
     }
 
-    removeCommand(command) {
+    removeCommand(command, index = undefined) {
         this.usedCommandsList.removeCommand(command);
-        this.unusedCommandsList.addCommand(command);
+        this.unusedCommandsList.addCommand(command, index);
+    }
+    reorderCommand(command, toIndex) {
+        this.usedCommandsList.reorderCommand(command, toIndex);
     }
 
     loadLevelFromJson(level) {
