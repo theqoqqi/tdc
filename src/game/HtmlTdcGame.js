@@ -8,11 +8,7 @@ export default class HtmlTdcGame {
         let game = new TdcGame();
         let worldRenderer = new WorldRenderer('.world', game);
 
-        // game.loadLevelFromJson(level1);
-
-        game.setSizeWorld(5, 5);
-        game.setPlayerPosition(1, 1);
-        game.setFinishPosition(5, 5);
+        game.loadLevelFromJson(level1);
 
         worldRenderer.render();
     }
