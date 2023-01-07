@@ -12,14 +12,14 @@ export default class SpriteAtlases {
 
     static #gameObjectAtlases = {
         player: new SpriteAtlas({
-            texturePath: 'assets/images/player.png',
+            texturePath: 'assets/images/objects/player.png',
             spriteWidth: 64,
             spriteHeight: 64,
             columns: 2,
             rows: 2,
         }),
         finish: new SpriteAtlas({
-            texturePath: 'assets/images/finish.png',
+            texturePath: 'assets/images/objects/finish.png',
             spriteWidth: 64,
             spriteHeight: 64,
             columns: 1,
