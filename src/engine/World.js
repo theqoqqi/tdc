@@ -7,11 +7,13 @@ export default class World {
             x: 0,
             y: 0,
             object: true,
+            type: 'player',
         };
         this.finish = {
             x: 0,
             y: 0,
             object: true,
+            type: 'finish',
         };
     }
 
