@@ -1,0 +1,100 @@
+
+.world-border {
+    position: absolute;
+    width: 320px;
+    height: 320px;
+
+    z-index: 100;
+}
+
+
+
+.world-border > * {
+    --offset: -7px;
+    --top-offset: var(--offset);
+    --bottom-offset: calc(var(--offset) - 56px);
+    --left-offset: var(--offset);
+    --right-offset: var(--offset);
+
+    --top-size: 32px;
+    --bottom-size: 64px;
+    --left-size: 32px;
+    --right-size: 32px;
+
+    position: absolute;
+    width: 100%;
+    height: 100%;
+
+    background-clip: border-box;
+    background-repeat: repeat;
+
+    image-rendering: pixelated;
+}
+
+
+
+.world-border .top {
+    top: var(--top-offset);
+    height: var(--top-size);
+}
+
+.world-border .middle {
+    top: calc(var(--top-size) + var(--top-offset));
+    bottom: calc(var(--bottom-size) + var(--bottom-offset));
+    height: calc(100% - var(--top-size) - var(--top-offset) - var(--bottom-size) - var(--bottom-offset));
+}
+
+.world-border .bottom {
+    bottom: var(--bottom-offset);
+    height: var(--bottom-size);
+}
+
+.world-border .left {
+    left: var(--left-offset);
+    width: var(--left-size);
+}
+
+.world-border .center {
+    left: calc(var(--left-size) + var(--left-offset));
+    right: calc(var(--right-size) + var(--right-offset));
+    width: calc(100% - var(--left-size) - var(--left-offset) - var(--right-size) - var(--right-offset));
+}
+
+.world-border .right {
+    right: var(--right-offset);
+    width: var(--right-size);
+}
+
+
+
+.world-border .top.left {
+    background-image: url('../assets/images/border/top-left.png');
+}
+
+.world-border .top.center {
+    background-image: url('../assets/images/border/top.png');
+}
+
+.world-border .top.right {
+    background-image: url('../assets/images/border/top-right.png');
+}
+
+.world-border .middle.left {
+    background-image: url('../assets/images/border/left.png');
+}
+
+.world-border .middle.right {
+    background-image: url('../assets/images/border/right.png');
+}
+
+.world-border .bottom.left {
+    background-image: url('../assets/images/border/bottom-left.png');
+}
+
+.world-border .bottom.center {
+    background-image: url('../assets/images/border/bottom.png');
+}
+
+.world-border .bottom.right {
+    background-image: url('../assets/images/border/bottom-right.png');
+}

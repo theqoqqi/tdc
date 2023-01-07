@@ -1,3 +1,5 @@
+@import 'world-border.css';
+
 :root, body, html {
     padding: 0;
     margin: 0;
@@ -24,6 +26,8 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
+
+    background-image: url('../assets/images/background.png');
 }
 
 .world {
@@ -40,16 +44,21 @@ body {
 
 }
 
-.grid-item {
+.grid-tile {
     position: absolute;
     width: 64px;
     height: 64px;
 
     background-image: url('../assets/images/grass.png');
     background-clip: border-box;
-    background-size: 200%;
-
-    border: 1px solid rgba(0, 0, 0, 0.1);
 
     image-rendering: pixelated;
+}
+
+.terrain-tile {
+    background-size: 512px 256px;
+}
+
+.object-tile {
+
 }

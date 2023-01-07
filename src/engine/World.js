@@ -14,7 +14,8 @@ export default class World {
             object: true,
         };
     }
-    getAllObjects() {
+
+    getAllGameObjects() {
         let objects = [];
         for (let worldKey in this) {
             if (this[worldKey].object === true) {
