@@ -1,7 +1,7 @@
 import level1 from './levels/level1.js';
 import TdcGame from '../engine/TdcGame.js';
 import WorldRenderer from '../game/WorldRenderer.js';
-import Gui from './Gui.js';
+import Gui from './gui/Gui.js';
 
 export default class HtmlTdcGame {
 
@@ -17,6 +17,6 @@ export default class HtmlTdcGame {
         game.loadLevelFromJson(level1);
 
         worldRenderer.render();
-        gui.render();
+        gui.refillCommands();
     }
 }
