@@ -24,4 +24,9 @@ export default class CommandList {
         let index = this.commands.indexOf(command);
         this.commands.splice (index, 1);
     }
+
+    reorderCommand(command, toIndex) {
+        this.removeCommand(command);
+        this.addCommand(command, toIndex);
+    }
 }
