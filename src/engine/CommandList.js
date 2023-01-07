@@ -6,17 +6,18 @@ export default class CommandList {
 
     getAllCommands() {
         let commands = [];
-        for (let commandKey in this) {
-            commands.push(this[commandKey]);
+        for (let command of this.commands) {
+            commands.push(command);
         }
         return commands;
     }
 
     addCommand(command, index = undefined) {
-        if (index === undefined) {
+        if (index !== undefined) {
+            this.commands.splice (index, 0, command);
+        } else {
             this.commands.push (command);
         }
-        this.commands.splice (index, 0, command);
     }
 
     removeCommand(command) {

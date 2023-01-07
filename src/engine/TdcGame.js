@@ -10,7 +10,7 @@ export default class TdcGame {
     }
 
     setSizeWorld(width, height) {
-        this.world.setSizeWorld (width,height);
+        this.world.setSizeWorld(width, height);
     }
 
     setPlayerPosition(x, y) {
@@ -22,11 +22,11 @@ export default class TdcGame {
     }
 
     getUnusedCommands() {
-        this.unusedCommandsList.getAllCommands();
+        return this.unusedCommandsList.getAllCommands();
     }
 
     getUsedCommands() {
-        this.usedCommandsList.getAllCommands();
+        return this.usedCommandsList.getAllCommands();
     }
 
     addCommands(level) {
@@ -34,7 +34,7 @@ export default class TdcGame {
             let steps = command.steps;
             command.steps = [];
             for (let i = 0; i < steps.length; i++) {
-                command.steps.push ({direction: steps[i]});
+                command.steps.push({direction: steps[i]});
             }
             this.unusedCommandsList.addCommand(command);
         }
@@ -50,7 +50,7 @@ export default class TdcGame {
         this.unusedCommandsList.addCommand(command);
     }
 
-    loadLevelFromJson (level) {
+    loadLevelFromJson(level) {
         this.setSizeWorld(level.width, level.height);
         this.setPlayerPosition(level.start.x, level.start.y);
         this.setFinishPosition(level.finish.x, level.finish.y);
