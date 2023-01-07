@@ -23,6 +23,8 @@ export default class WorldRenderer {
     render() {
         this.clearWorld();
 
+        this.setWorldSize(this.#world.width, this.#world.height);
+
         this.renderTerrain();
         this.renderGameObjects(this.#world.getAllGameObjects());
     }
@@ -33,6 +35,13 @@ export default class WorldRenderer {
                 this.renderTerrainTile(x, y);
             }
         }
+    }
+
+    setWorldSize(width, height) {
+        this.$world.css({
+            width: width * this.#tileSize + 'px',
+            height: height * this.#tileSize + 'px',
+        });
     }
 
     renderTerrainTile(x, y) {
