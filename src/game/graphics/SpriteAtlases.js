@@ -18,6 +18,13 @@ export default class SpriteAtlases {
             columns: 2,
             rows: 2,
         }),
+        finish: new SpriteAtlas({
+            texturePath: 'assets/images/finish.png',
+            spriteWidth: 64,
+            spriteHeight: 64,
+            columns: 1,
+            rows: 1,
+        }),
     };
 
     static get grassAtlas() {
