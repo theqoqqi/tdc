@@ -16,4 +16,10 @@ export default class TdcGame {
     setFinishPosition(x, y) {
         this.world.setFinishPosition(x, y);
     }
+
+    loadLevelFromJson (level) {
+        this.setSizeWorld(level.width, level.height);
+        this.setPlayerPosition(level.start.x, level.start.y);
+        this.setFinishPosition(level.finish.x, level.finish.y);
+    }
 }
