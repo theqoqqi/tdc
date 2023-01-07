@@ -15,13 +15,37 @@ body {
 }
 
 .game {
+    display: flex;
+
     width: 100%;
     height: 100%;
 }
 
-.world-container {
-    width: 100%;
+.sidebar {
+    width: 200px;
     height: 100%;
+
+    background-image: url('../assets/images/gui/sidebar.png');
+    background-position: top right;
+}
+
+.command-list {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+
+    padding: 20px;
+}
+
+.command {
+    width: 160px;
+    height: 32px;
+    background-image: url('../assets/images/gui/command.png');
+}
+
+.world-container {
+    height: 100%;
+    flex: 1;
 
     display: flex;
     justify-content: center;
