@@ -35,6 +35,46 @@ body {
     background-position: top right;
 }
 
+.controls {
+    position: absolute;
+    display: flex;
+
+    right: 0;
+    top: 0;
+    height: 80px;
+    padding: 8px;
+
+    border: 1px solid #56341f;
+    border-top: none;
+    border-right: none;
+    border-bottom-left-radius: 8px;
+
+    box-shadow: #635d51 4px -4px 4px -4px inset;
+}
+
+.controls .button {
+    width: 64px;
+    height: 64px;
+
+    border: 1px solid #56341f;
+    border-radius: 8px;
+    background-size: 48px 48px;
+    background-position: center;
+    background-repeat: no-repeat;
+
+    box-shadow: #635d51 0 0 4px 1px inset;
+
+    cursor: pointer;
+}
+
+.controls .play-button {
+    background-image: url('../assets/images/gui/play.png');
+}
+
+.controls .stop-button {
+    background-image: url('../assets/images/gui/stop.png');
+}
+
 .world-container {
     height: 100%;
     flex: 1;
@@ -45,6 +85,8 @@ body {
 
     background-image: url('../assets/images/background.png');
 }
+
+
 
 .world {
     position: relative;

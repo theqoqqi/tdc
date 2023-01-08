@@ -6,17 +6,23 @@ import Gui from './gui/Gui.js';
 export default class HtmlTdcGame {
 
     constructor() {
-        let game = new TdcGame();
-        let worldRenderer = new WorldRenderer('.world', game);
-        let gui = new Gui({
-            game,
-            unusedCommandsSelector: '.unused-commands',
-            usedCommandsSelector: '.used-commands',
-        });
+        this.game = new TdcGame();
+        this.worldRenderer = new WorldRenderer('.world', this.game);
+        this.gui = new Gui(this.game);
 
-        game.loadLevelFromJson(level1);
+        this.loadLevel(level1);
 
-        worldRenderer.render();
-        gui.refillCommands();
+        setInterval(() => this.update(), 25);
+    }
+
+    loadLevel(levelJson) {
+        this.game.loadLevelFromJson(levelJson);
+
+        this.worldRenderer.render();
+        this.gui.refillCommands();
+    }
+
+    update() {
+        this.gui.update();
     }
 }

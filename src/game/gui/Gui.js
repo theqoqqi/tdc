@@ -2,10 +2,13 @@ import CommandDivFactory from './CommandDivFactory.js';
 
 export default class Gui {
 
-    constructor({game, unusedCommandsSelector, usedCommandsSelector}) {
+    constructor(game) {
         this.game = game;
-        this.$unusedCommands = $(unusedCommandsSelector);
-        this.$usedCommands = $(usedCommandsSelector);
+        this.$unusedCommands = $('.unused-commands');
+        this.$usedCommands = $('.used-commands');
+        this.$playButton = $('.play-button');
+        this.$stopButton = $('.stop-button');
+        this.isPlaying = false;
 
         this.unusedCommandsSortable = new Sortable(this.$unusedCommands[0], {
             group: {
@@ -22,6 +25,14 @@ export default class Gui {
             onAdd: e => this.#addCommand(e.oldIndex, e.newIndex),
             onRemove: e => this.#removeCommand(e.oldIndex, e.newIndex),
             onUpdate: e => this.#reorderCommand(e.oldIndex, e.newIndex),
+        });
+
+        this.$playButton.click(e => {
+            this.play();
+        });
+
+        this.$stopButton.click(e => {
+            this.stop();
         });
     }
 
@@ -46,6 +57,12 @@ export default class Gui {
         this.game.reorderCommand(command, toIndex);
     }
 
+    update() {
+        if (this.game.isPlaying !== this.isPlaying) {
+            this.setPlaying(this.game.isPlaying);
+        }
+    }
+
     refillCommands() {
         this.clearCommands();
         this.fillCommands();
@@ -66,5 +83,21 @@ export default class Gui {
         let $command = CommandDivFactory.create(command);
 
         this.$unusedCommands.append($command);
+    }
+
+    play() {
+        this.game.play();
+        this.setPlaying(true);
+    }
+
+    stop() {
+        this.game.stop();
+        this.setPlaying(false);
+    }
+
+    setPlaying(isPlaying) {
+        this.isPlaying = isPlaying;
+        this.$playButton.toggle(!isPlaying);
+        this.$stopButton.toggle(isPlaying);
     }
 }
