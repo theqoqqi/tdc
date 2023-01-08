@@ -25,6 +25,7 @@
 
     border: 1px solid #56341f;
     border-radius: 8px;
+    background-color: #8888;
     background-size: 48px 48px;
     background-position: center;
     background-repeat: no-repeat;
@@ -32,6 +33,23 @@
     box-shadow: #635d51 0 0 4px 1px inset;
 
     cursor: pointer;
+    transition: .15s;
+}
+
+.controls .button:hover:not(:disabled) {
+    background-color: #aaa2;
+    background-size: 40px 40px;
+
+    filter: sepia(1);
+}
+
+.controls .button:active:not(:disabled) {
+    background-size: 48px 48px;
+    transition: none;
+}
+
+.controls .button:disabled {
+    filter: opacity(0.5);
 }
 
 .controls .play-button {
@@ -40,4 +58,8 @@
 
 .controls .stop-button {
     background-image: url('../assets/images/gui/stop.png');
+}
+
+.controls .next-level-button {
+    background-image: url('../assets/images/gui/next-level.png');
 }

@@ -2,13 +2,16 @@ import CommandDivFactory from './CommandDivFactory.js';
 
 export default class Gui {
 
-    constructor(game) {
-        this.game = game;
+    constructor(htmlGame) {
+        this.htmlGame = htmlGame;
+        this.game = htmlGame.game;
         this.$unusedCommands = $('.unused-commands');
         this.$usedCommands = $('.used-commands');
         this.$playButton = $('.play-button');
         this.$stopButton = $('.stop-button');
+        this.$nextLevelButton = $('.next-level-button');
         this.isPlaying = false;
+        this.isLevelDone = false;
 
         this.unusedCommandsSortable = new Sortable(this.$unusedCommands[0], {
             group: {
@@ -33,6 +36,10 @@ export default class Gui {
 
         this.$stopButton.click(e => {
             this.stop();
+        });
+
+        this.$nextLevelButton.click(e => {
+            this.loadNextLevel();
         });
 
         this.setPlaying(false);
@@ -62,6 +69,10 @@ export default class Gui {
     update() {
         if (this.game.isPlaying !== this.isPlaying) {
             this.setPlaying(this.game.isPlaying);
+        }
+
+        if (this.game.isLevelDone !== this.isLevelDone) {
+            this.setLevelDone(this.game.isLevelDone);
         }
     }
 
@@ -97,11 +108,20 @@ export default class Gui {
         this.setPlaying(false);
     }
 
+    loadNextLevel() {
+        this.htmlGame.loadNextLevel();
+    }
+
     setPlaying(isPlaying) {
         this.isPlaying = isPlaying;
         this.$playButton.toggle(!isPlaying);
         this.$stopButton.toggle(isPlaying);
         this.unusedCommandsSortable.option('disabled', isPlaying);
         this.usedCommandsSortable.option('disabled', isPlaying);
+    }
+
+    setLevelDone(isLevelDone) {
+        this.isLevelDone = isLevelDone;
+        this.$nextLevelButton.prop('disabled', !!isLevelDone);
     }
 }

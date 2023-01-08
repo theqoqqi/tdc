@@ -1,18 +1,35 @@
 import level1 from './levels/level1.js';
+import level2 from './levels/level2.js';
 import TdcGame from '../engine/TdcGame.js';
 import WorldRenderer from '../game/WorldRenderer.js';
 import Gui from './gui/Gui.js';
 
 export default class HtmlTdcGame {
 
+    static #levels = [
+        level1,
+        level2,
+    ];
+
+    #currentLevel = -1;
+
     constructor() {
         this.game = new TdcGame();
         this.worldRenderer = new WorldRenderer('.world', this.game);
-        this.gui = new Gui(this.game);
+        this.gui = new Gui(this);
 
-        this.loadLevel(level1);
+        this.loadNextLevel();
 
         setInterval(() => this.update(), 25);
+    }
+
+    loadNextLevel() {
+        let nextLevel = ++this.#currentLevel;
+        let level = HtmlTdcGame.#levels[nextLevel];
+
+        if (level) {
+            this.loadLevel(level);
+        }
     }
 
     loadLevel(levelJson) {
