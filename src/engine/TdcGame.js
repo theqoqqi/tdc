@@ -59,9 +59,9 @@ export default class TdcGame {
         this.usedCommandsList.reorderCommand(command, toIndex);
     }
 
-     play() {
+    play() {
         this.isPlaying = true;
-         this.commandExecutor.run();
+        this.commandExecutor.run();
     }
 
     isInBounds(x, y) {
