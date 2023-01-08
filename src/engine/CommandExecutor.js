@@ -1,7 +1,8 @@
 export default class CommandExecutor {
 
-    constructor(world) {
-        this.world = world;
+    constructor(game) {
+        this.world = game.world;
+        this.game = game;
         this.moveCommands = [
             {
                 direction: 'right',
@@ -52,10 +53,36 @@ export default class CommandExecutor {
                 this.world.player.x += command.dx;
                 this.world.player.y += command.dy;
             }
-            if (this.world.player.x < 1 || this.world.player.x > this.world.width ||
-                this.world.player.y < 1 || this.world.player.y > this.world.height) {
-                break
+        }
+    }
+
+    sleep(ms) {
+        return new Promise(resolve => setTimeout(resolve, ms));
+    }
+
+    async run() {
+        let commands = this.game.getUsedCommands();
+        for (let i = 0; i < commands.length; i++) {
+            for (let j = 0; j < commands[i].steps.length; j++) {
+                if (this.game.isPlaying && this.world.isInBounds(this.world.player.x, this.world.player.y) && this.shouldMove(commands[i].steps[j].direction)) {
+                    this.move(commands[i].steps[j].direction);
+                    await this.sleep(500);
+                    console.log(this.world.player.x);
+                    console.log(this.world.player.y);
+                }
             }
         }
+    }
+
+    shouldMove (direction) {
+        let x = this.world.player.x;
+        let y = this.world.player.y
+        for (const command of this.moveCommands) {
+            if (direction === command.direction) {
+                x += command.dx;
+                y += command.dy;
+            }
+        }
+        return this.world.isInBounds (x, y);
     }
 }

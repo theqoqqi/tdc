@@ -70,4 +70,9 @@ export default class World {
         this.finish.x = x;
         this.finish.y = y;
     }
+
+    isInBounds(x, y) {
+        return x >= 1 && x <= this.width
+            && y >= 1 && y <= this.height
+    }
 }

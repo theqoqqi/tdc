@@ -8,7 +8,7 @@ export default class TdcGame {
         this.world = new World();
         this.unusedCommandsList = new CommandList();
         this.usedCommandsList = new CommandList();
-        this.commandExecutor = new CommandExecutor(this.world);
+        this.commandExecutor = new CommandExecutor(this);
         this.level = null;
         this.isPlaying = false;
     }
@@ -59,24 +59,15 @@ export default class TdcGame {
         this.usedCommandsList.reorderCommand(command, toIndex);
     }
 
-    sleep(ms) {
-        return new Promise(resolve => setTimeout(resolve, ms));
+     play() {
+        this.isPlaying = true;
+         this.commandExecutor.run().then(() => {
+             this.isPlaying = false;
+         });
     }
 
-    async play() {
-        this.isPlaying = true;
-        let commands = this.getUsedCommands();
-        for (let i = 0; i < commands.length ; i++) {
-            for (let j = 0; j < commands[i].steps.length; j++) {
-                if (this.isPlaying) {
-                    this.commandExecutor.move(commands[i].steps[j].direction);
-                    await this.sleep(500);
-                    console.log(this.world.player.x);
-                    console.log(this.world.player.y);
-                }
-            }
-        }
-        this.isPlaying = false;
+    isInBounds(x, y) {
+        return this.world.isInBounds(x, y);
     }
 
     stop() {
