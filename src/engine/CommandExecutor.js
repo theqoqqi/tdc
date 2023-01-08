@@ -3,6 +3,7 @@ export default class CommandExecutor {
     constructor(game) {
         this.world = game.world;
         this.game = game;
+        this.currentRunId = 0;
         this.moveCommands = [
             {
                 direction: 'right',
@@ -61,14 +62,17 @@ export default class CommandExecutor {
     }
 
     async run() {
+        let runId = ++this.currentRunId;
         let commands = this.game.getUsedCommands();
         for (let i = 0; i < commands.length; i++) {
             for (let j = 0; j < commands[i].steps.length; j++) {
-                if (this.game.isPlaying && this.world.isInBounds(this.world.player.x, this.world.player.y) && this.shouldMove(commands[i].steps[j].direction)) {
+                if (this.game.isPlaying && this.shouldMove(commands[i].steps[j].direction) && runId === this.currentRunId) {
                     this.move(commands[i].steps[j].direction);
                     await this.sleep(500);
                     console.log(this.world.player.x);
                     console.log(this.world.player.y);
+                } else {
+                    return;
                 }
             }
         }

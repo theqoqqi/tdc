@@ -61,9 +61,7 @@ export default class TdcGame {
 
      play() {
         this.isPlaying = true;
-         this.commandExecutor.run().then(() => {
-             this.isPlaying = false;
-         });
+         this.commandExecutor.run();
     }
 
     isInBounds(x, y) {
