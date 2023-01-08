@@ -25,6 +25,9 @@
 }
 
 .terrain-tile {
+    border: 1px solid #0002;
+
+    background-origin: border-box;
     background-size: 512px 256px;
 }
 
