@@ -53,7 +53,6 @@ export default class World {
         for (const object of this.objects) {
             objects.push(object);
         }
-        console.log(objects);
         return objects;
     }
 
