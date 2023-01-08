@@ -25,13 +25,53 @@ export default class SpriteAtlases {
             columns: 1,
             rows: 1,
         }),
+        item: {
+            apple: new SpriteAtlas({
+                texturePath: 'assets/images/objects/items/apple.png',
+                spriteWidth: 32,
+                spriteHeight: 32,
+                columns: 1,
+                rows: 1,
+            }),
+            'green-apple': new SpriteAtlas({
+                texturePath: 'assets/images/objects/items/green-apple.png',
+                spriteWidth: 32,
+                spriteHeight: 32,
+                columns: 1,
+                rows: 1,
+            }),
+            cheese: new SpriteAtlas({
+                texturePath: 'assets/images/objects/items/cheese.png',
+                spriteWidth: 32,
+                spriteHeight: 32,
+                columns: 1,
+                rows: 1,
+            }),
+            mushroom: new SpriteAtlas({
+                texturePath: 'assets/images/objects/items/mushroom.png',
+                spriteWidth: 32,
+                spriteHeight: 32,
+                columns: 1,
+                rows: 1,
+            }),
+        }
     };
 
     static get grassAtlas() {
         return this.#grassAtlas;
     }
 
-    static get(name) {
-        return this.#gameObjectAtlases[name] ?? null; // TODO: добавить атлас по умолчанию
+    static get(className, type) {
+        let atlas = this.#gameObjectAtlases[className];
+
+        if (!atlas) {
+            return null; // TODO: добавить атлас по умолчанию
+        }
+
+        if (!(atlas instanceof SpriteAtlas)) {
+            atlas = atlas[type];
+        }
+
+        return atlas ?? null; // TODO: добавить атлас по умолчанию
     }
 }
