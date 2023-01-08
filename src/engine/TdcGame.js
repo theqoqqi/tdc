@@ -1,5 +1,6 @@
 import World from '../engine/World.js';
 import CommandList from '../engine/CommandList.js';
+import CommandExecutor from '../engine/CommandExecutor.js';
 
 export default class TdcGame {
 
@@ -7,6 +8,8 @@ export default class TdcGame {
         this.world = new World();
         this.unusedCommandsList = new CommandList();
         this.usedCommandsList = new CommandList();
+        this.commandExecutor = new CommandExecutor(this.world);
+        this.level = null;
         this.isPlaying = false;
     }
 
@@ -24,7 +27,6 @@ export default class TdcGame {
     }
 
     getUnusedCommands() {
-        console.log(this.unusedCommandsList.getAllCommands());
         return this.unusedCommandsList.getAllCommands();
     }
 
@@ -52,24 +54,36 @@ export default class TdcGame {
         this.usedCommandsList.removeCommand(command);
         this.unusedCommandsList.addCommand(command, index);
     }
+
     reorderCommand(command, toIndex) {
         this.usedCommandsList.reorderCommand(command, toIndex);
     }
 
-    play() {
+    sleep(ms) {
+        return new Promise(resolve => setTimeout(resolve, ms));
+    }
+
+    async play() {
         this.isPlaying = true;
-        let commands = this.usedCommandsList;
+        let commands = this.getUsedCommands();
+        for (let i = 0; i < commands.length ; i++) {
+            for (let j = 0; j < commands[i].steps.length; j++) {
+                this.commandExecutor.move(commands[i].steps[j].direction);
+                await this.sleep(500);
+                console.log(this.world.player.x);
+                console.log(this.world.player.y);
 
-
+            }
+        }
     }
 
     stop() {
         this.isPlaying = false;
-
-
+        this.setPlayerPosition(this.level.start.x, this.level.start.y);
     }
 
     loadLevelFromJson(level) {
+        this.level = level;
         this.setSizeWorld(level.width, level.height);
         this.setPlayerPosition(level.start.x, level.start.y);
         this.setFinishPosition(level.finish.x, level.finish.y);
