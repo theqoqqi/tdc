@@ -16,30 +16,30 @@ export default class World {
             className: 'finish',
         };
         this.objects = [
-            {
-                type: 'item',
-                model: 'apple',
-                x: 0,
-                y: 0,
-            },
-            {
-                type: 'item',
-                model: 'green-apple',
-                x: 0,
-                y: 0,
-            },
-            {
-                type: 'item',
-                model: 'cheese',
-                x: 0,
-                y: 0,
-            },
-            {
-                type: 'item',
-                model: 'mushroom',
-                x: 0,
-                y: 0,
-            },
+        //     {
+        //         className: 'item',
+        //         type: 'apple',
+        //         x: 0,
+        //         y: 0,
+        //     },
+        //     {
+        //         className: 'item',
+        //         type: 'green-apple',
+        //         x: 0,
+        //         y: 0,
+        //     },
+        //     {
+        //         className: 'item',
+        //         type: 'cheese',
+        //         x: 0,
+        //         y: 0,
+        //     },
+        //     {
+        //         className: 'item',
+        //         type: 'mushroom',
+        //         x: 0,
+        //         y: 0,
+        //     },
         ];
     }
 
@@ -50,10 +50,10 @@ export default class World {
                 objects.push(this[worldKey]);
             }
         }
-        // for (const object of this.objects) {
-        //     objects.push(object);
-        // }
-        // console.log(objects);
+        for (const object of this.objects) {
+            objects.push(object);
+        }
+        console.log(objects);
         return objects;
     }
 

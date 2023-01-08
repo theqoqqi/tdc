@@ -68,7 +68,7 @@ export default class TdcGame {
         let commands = this.getUsedCommands();
         for (let i = 0; i < commands.length ; i++) {
             for (let j = 0; j < commands[i].steps.length; j++) {
-                if(this.isPlaying) {
+                if (this.isPlaying) {
                     this.commandExecutor.move(commands[i].steps[j].direction);
                     await this.sleep(500);
                     console.log(this.world.player.x);
@@ -85,6 +85,8 @@ export default class TdcGame {
 
     loadLevelFromJson(level) {
         this.level = level;
+        this.usedCommandsList.commands = [];
+        this.unusedCommandsList.commands = [];
         this.setSizeWorld(level.width, level.height);
         this.setPlayerPosition(level.start.x, level.start.y);
         this.setFinishPosition(level.finish.x, level.finish.y);
