@@ -14,7 +14,58 @@
 
     width: 160px;
     height: 32px;
-    padding: 0 8px;
+    padding: 0 8px 4px;
 
     background-image: url('../assets/images/gui/command.png');
+    cursor: pointer;
+
+    transition: .15s;
 }
+
+.command:hover {
+    filter: sepia(1);
+}
+
+.command-icon {
+    width: 20px;
+    height: 20px;
+
+    background-size: contain;
+}
+
+.step-arrow {
+
+}
+
+.arrow-down {
+    background-image: url('../assets/images/gui/commands/icons/arrow-down.png');
+}
+
+.arrow-down-left {
+    background-image: url('../assets/images/gui/commands/icons/arrow-down-left.png');
+}
+
+.arrow-down-right {
+    background-image: url('../assets/images/gui/commands/icons/arrow-down-right.png');
+}
+
+.arrow-left {
+    background-image: url('../assets/images/gui/commands/icons/arrow-left.png');
+}
+
+.arrow-right {
+    background-image: url('../assets/images/gui/commands/icons/arrow-right.png');
+}
+
+.arrow-up {
+    background-image: url('../assets/images/gui/commands/icons/arrow-up.png');
+}
+
+.arrow-up-left {
+    background-image: url('../assets/images/gui/commands/icons/arrow-up-left.png');
+}
+
+.arrow-up-right {
+    background-image: url('../assets/images/gui/commands/icons/arrow-up-right.png');
+}
+

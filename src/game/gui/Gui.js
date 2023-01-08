@@ -1,4 +1,4 @@
-import CommandDivFactory from './CommandDivFactory.js';
+import CommandElementFactory from './CommandElementFactory.js';
 
 export default class Gui {
 
@@ -93,7 +93,7 @@ export default class Gui {
     }
 
     addUnusedCommand(command) {
-        let $command = CommandDivFactory.create(command);
+        let $command = CommandElementFactory.create(command);
 
         this.$unusedCommands.append($command);
     }
@@ -122,6 +122,6 @@ export default class Gui {
 
     setLevelDone(isLevelDone) {
         this.isLevelDone = isLevelDone;
-        this.$nextLevelButton.prop('disabled', !!isLevelDone);
+        this.$nextLevelButton.prop('disabled', !!isLevelDone); // TODO: инвертировал для тестов, убрать один !
     }
 }
