@@ -122,6 +122,7 @@ export default class WorldRenderer {
     clearWorld() {
         this.$terrain.empty();
         this.$objects.empty();
+        this.#objectsToElements.clear();
     }
 
     renderTile({type, x, y, sprite}) {
