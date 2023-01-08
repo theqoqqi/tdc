@@ -6,26 +6,26 @@ const level1 = {
     finish: { x: 5, y: 1 },
     commands: [
         {
-            type: 'move',
+            className: 'move',
             steps: [
                 'up',
             ]
         },
         {
-            type: 'move',
+            className: 'move',
             steps: [
                 'right',
                 'right',
             ]
         },
         {
-            type: 'move',
+            className: 'move',
             steps: [
                 'up-right',
             ]
         },
         {
-            type: 'move',
+            className: 'move',
             steps: [
                 'up-right',
                 'up',
