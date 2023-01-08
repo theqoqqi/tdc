@@ -68,11 +68,12 @@ export default class TdcGame {
         let commands = this.getUsedCommands();
         for (let i = 0; i < commands.length ; i++) {
             for (let j = 0; j < commands[i].steps.length; j++) {
-                this.commandExecutor.move(commands[i].steps[j].direction);
-                await this.sleep(500);
-                console.log(this.world.player.x);
-                console.log(this.world.player.y);
-
+                if(this.isPlaying) {
+                    this.commandExecutor.move(commands[i].steps[j].direction);
+                    await this.sleep(500);
+                    console.log(this.world.player.x);
+                    console.log(this.world.player.y);
+                }
             }
         }
     }

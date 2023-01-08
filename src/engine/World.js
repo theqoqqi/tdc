@@ -15,6 +15,32 @@ export default class World {
             object: true,
             className: 'finish',
         };
+        this.objects = [
+            {
+                type: 'item',
+                model: 'apple',
+                x: 0,
+                y: 0,
+            },
+            {
+                type: 'item',
+                model: 'green-apple',
+                x: 0,
+                y: 0,
+            },
+            {
+                type: 'item',
+                model: 'cheese',
+                x: 0,
+                y: 0,
+            },
+            {
+                type: 'item',
+                model: 'mushroom',
+                x: 0,
+                y: 0,
+            },
+        ];
     }
 
     getAllGameObjects() {
@@ -24,6 +50,10 @@ export default class World {
                 objects.push(this[worldKey]);
             }
         }
+        // for (const object of this.objects) {
+        //     objects.push(object);
+        // }
+        // console.log(objects);
         return objects;
     }
 

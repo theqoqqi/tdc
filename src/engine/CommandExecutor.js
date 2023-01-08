@@ -18,6 +18,31 @@ export default class CommandExecutor {
                 dx: 1,
                 dy: -1,
             },
+            {
+                direction: 'left',
+                dx: -1,
+                dy: 0,
+            },
+            {
+                direction: 'up-left',
+                dx: -1,
+                dy: -1,
+            },
+            {
+                direction: 'down',
+                dx: 0,
+                dy: 1,
+            },
+            {
+                direction: 'down-left',
+                dx: -1,
+                dy: 1,
+            },
+            {
+                direction: 'down-right',
+                dx: 1,
+                dy: 1,
+            },
         ];
     }
 
