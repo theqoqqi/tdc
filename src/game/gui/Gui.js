@@ -99,5 +99,7 @@ export default class Gui {
         this.isPlaying = isPlaying;
         this.$playButton.toggle(!isPlaying);
         this.$stopButton.toggle(isPlaying);
+        this.unusedCommandsSortable.option('disabled', isPlaying);
+        this.usedCommandsSortable.option('disabled', isPlaying);
     }
 }

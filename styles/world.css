@@ -1,0 +1,33 @@
+
+.world {
+    position: relative;
+    width: 320px;
+    height: 320px;
+}
+
+.terrain {
+
+}
+
+.objects {
+
+}
+
+.grid-tile {
+    position: absolute;
+    width: 64px;
+    height: 64px;
+
+    background-image: url('../assets/images/grass.png');
+    background-clip: border-box;
+
+    image-rendering: pixelated;
+}
+
+.terrain-tile {
+    background-size: 512px 256px;
+}
+
+.object-tile {
+
+}
