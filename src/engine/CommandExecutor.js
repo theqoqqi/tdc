@@ -52,6 +52,10 @@ export default class CommandExecutor {
                 this.world.player.x += command.dx;
                 this.world.player.y += command.dy;
             }
+            if (this.world.player.x < 1 || this.world.player.x > this.world.width ||
+                this.world.player.y < 1 || this.world.player.y > this.world.height) {
+                break
+            }
         }
     }
 }

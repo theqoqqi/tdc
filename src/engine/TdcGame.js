@@ -76,6 +76,7 @@ export default class TdcGame {
                 }
             }
         }
+        this.isPlaying = false;
     }
 
     stop() {
