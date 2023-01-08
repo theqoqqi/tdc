@@ -40,6 +40,7 @@ export default class HtmlTdcGame {
     }
 
     update() {
+        this.worldRenderer.update();
         this.gui.update();
     }
 }

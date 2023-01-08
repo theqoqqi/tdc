@@ -29,5 +29,5 @@
 }
 
 .object-tile {
-
+    transition: .4s;
 }

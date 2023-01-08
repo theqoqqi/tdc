@@ -11,6 +11,8 @@ export default class WorldRenderer {
 
     #world;
 
+    #objectsToElements = new Map();
+
     constructor(selector, game) {
         this.$world = $(selector);
         this.$terrain = this.$world.find('.terrain');
@@ -26,7 +28,62 @@ export default class WorldRenderer {
         this.setWorldSize(this.#world.width, this.#world.height);
 
         this.renderTerrain();
-        this.renderGameObjects(this.#world.getAllGameObjects());
+    }
+
+    update() {
+        for (const $gameObject of this.#objectsToElements.values()) {
+            $gameObject.data('removed', true);
+        }
+
+        for (const gameObject of this.#world.getAllGameObjects()) {
+            let $gameObject = this.getOrCreateObjectElement(gameObject);
+
+            $gameObject.css({
+                left: this.gamePosToCssPos(gameObject.x),
+                top: this.gamePosToCssPos(gameObject.y),
+            });
+
+            $gameObject.data('removed', false);
+        }
+
+        for (const gameObject of this.#objectsToElements.keys()) {
+            let $gameObject = this.getObjectElement(gameObject);
+
+            if ($gameObject.data('removed')) {
+                this.removeObjectElement(gameObject);
+            }
+        }
+    }
+
+    getOrCreateObjectElement(gameObject) {
+        let $gameObject = this.getObjectElement(gameObject);
+
+        if (!$gameObject) {
+            $gameObject = this.createObjectElement(gameObject);
+        }
+
+        return $gameObject;
+    }
+
+    getObjectElement(gameObject) {
+        return this.#objectsToElements.get(gameObject);
+    }
+
+    createObjectElement(gameObject) {
+        let $gameObject = this.renderGameObject(gameObject);
+
+        this.#objectsToElements.set(gameObject, $gameObject);
+
+        return $gameObject;
+    }
+
+    removeObjectElement(gameObject) {
+        let $gameObject = this.getObjectElement(gameObject);
+
+        if ($gameObject) {
+            $gameObject.remove();
+            this.#objectsToElements.delete(gameObject);
+        }
     }
 
     renderTerrain() {
@@ -53,14 +110,8 @@ export default class WorldRenderer {
         });
     }
 
-    renderGameObjects(gameObjects) {
-        for (const gameObject of gameObjects) {
-            this.renderGameObject(gameObject);
-        }
-    }
-
     renderGameObject(gameObject) {
-        this.renderTile({
+        return this.renderTile({
             x: gameObject.x,
             y: gameObject.y,
             type: 'object-tile',
@@ -75,16 +126,19 @@ export default class WorldRenderer {
 
     renderTile({type, x, y, sprite}) {
         let $tile = $(`<div class='grid-tile ${type}'>`);
+        let $container = type === 'terrain-tile' ? this.$terrain : this.$objects;
 
         $tile.css({
-            left: (x - 1) * this.#tileSize + 'px',
-            top: (y - 1) * this.#tileSize + 'px',
+            left: this.gamePosToCssPos(x),
+            top: this.gamePosToCssPos(y),
             backgroundImage: `url('${sprite.atlas.texturePath}')`,
             backgroundPositionX: -sprite.x * this.#pixelScale + 'px',
             backgroundPositionY: -sprite.y * this.#pixelScale + 'px',
         });
 
-        this.$terrain.append($tile);
+        $container.append($tile);
+
+        return $tile;
     }
 
     getRandomGrassSprite(x, y) {
@@ -104,5 +158,9 @@ export default class WorldRenderer {
         return SpriteAtlases
             .get(gameObject.type)
             .getSprite(0, 0);
+    }
+
+    gamePosToCssPos(pos) {
+        return (pos - 1) * this.#tileSize + 'px';
     }
 }
