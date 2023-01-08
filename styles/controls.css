@@ -2,11 +2,14 @@
 .controls {
     position: absolute;
     display: flex;
+    gap: 8px;
 
     right: 0;
     top: 0;
     height: 80px;
     padding: 8px;
+
+    background-image: url('../assets/images/gui/sidebar.png');
 
     border: 1px solid #56341f;
     border-top: none;
