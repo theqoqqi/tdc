@@ -34,6 +34,8 @@ export default class Gui {
         this.$stopButton.click(e => {
             this.stop();
         });
+
+        this.setPlaying(false);
     }
 
     #addCommand(unusedCommandIndex, usedCommandIndex) {
