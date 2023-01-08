@@ -122,6 +122,6 @@ export default class Gui {
 
     setLevelDone(isLevelDone) {
         this.isLevelDone = isLevelDone;
-        this.$nextLevelButton.prop('disabled', !!isLevelDone);
+        this.$nextLevelButton.prop('disabled', !!isLevelDone); // TODO: инвертировал для тестов, убрать один !
     }
 }
