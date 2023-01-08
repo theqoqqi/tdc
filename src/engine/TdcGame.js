@@ -7,7 +7,9 @@ export default class TdcGame {
         this.world = new World();
         this.unusedCommandsList = new CommandList();
         this.usedCommandsList = new CommandList();
+        this.isPlaying = false;
     }
+
 
     setSizeWorld(width, height) {
         this.world.setSizeWorld(width, height);
@@ -22,6 +24,7 @@ export default class TdcGame {
     }
 
     getUnusedCommands() {
+        console.log(this.unusedCommandsList.getAllCommands());
         return this.unusedCommandsList.getAllCommands();
     }
 
@@ -51,6 +54,19 @@ export default class TdcGame {
     }
     reorderCommand(command, toIndex) {
         this.usedCommandsList.reorderCommand(command, toIndex);
+    }
+
+    play() {
+        this.isPlaying = true;
+        let commands = this.usedCommandsList;
+
+
+    }
+
+    stop() {
+        this.isPlaying = false;
+
+
     }
 
     loadLevelFromJson(level) {
