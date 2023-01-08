@@ -69,8 +69,8 @@ export default class CommandExecutor {
                 if (this.game.isPlaying && this.shouldMove(commands[i].steps[j].direction) && runId === this.currentRunId) {
                     this.move(commands[i].steps[j].direction);
                     await this.sleep(500);
-                    console.log(this.world.player.x);
-                    console.log(this.world.player.y);
+                    // console.log(this.world.player.x);
+                    // console.log(this.world.player.y);
                 } else {
                     return;
                 }
