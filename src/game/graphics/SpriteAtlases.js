@@ -30,14 +30,21 @@ export default class SpriteAtlases {
             'green-apple': SpriteAtlases.#createObjectAtlas('items/green-apple'),
             cheese: SpriteAtlases.#createObjectAtlas('items/cheese'),
             mushroom: SpriteAtlases.#createObjectAtlas('items/mushroom'),
-        }
+        },
+        obstacle: {
+            wall: SpriteAtlases.#createObjectAtlas('obstacles/wall'),
+            grave: {
+                cross: SpriteAtlases.#createObjectAtlas('obstacles/graves/cross'),
+                monument: SpriteAtlases.#createObjectAtlas('obstacles/graves/monument'),
+            },
+        },
     };
 
     static get grassAtlas() {
         return this.#grassAtlas;
     }
 
-    static get(className, type) {
+    static get(className, type, variant) {
         let atlas = this.#gameObjectAtlases[className];
 
         if (!atlas) {
@@ -46,6 +53,14 @@ export default class SpriteAtlases {
 
         if (!(atlas instanceof SpriteAtlas)) {
             atlas = atlas[type];
+        }
+
+        if (!atlas) {
+            return this.#defaultAtlas;
+        }
+
+        if (!(atlas instanceof SpriteAtlas)) {
+            atlas = atlas[variant];
         }
 
         return atlas ?? this.#defaultAtlas;
