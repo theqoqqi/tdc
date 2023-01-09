@@ -1,0 +1,39 @@
+
+.status-bar {
+    display: flex;
+    align-items: stretch;
+
+    height: 48px;
+
+    background-image: url('../assets/images/gui/sidebar.png');
+
+    border: 1px solid #56341f;
+    border-top: none;
+    border-right: none;
+    border-bottom-left-radius: 8px;
+
+    box-shadow: #635d51 4px -4px 4px -4px inset;
+}
+
+.score {
+    width: 64px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    padding: 0;
+}
+
+.score-number {
+    font-size: 24px;
+    font-weight: 500;
+}
+
+.score-title {
+    margin-top: -4px;
+
+    font-size: 14px;
+    font-weight: 500;
+}

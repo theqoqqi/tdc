@@ -1,11 +1,8 @@
 
 .controls {
-    position: absolute;
     display: flex;
     gap: 8px;
 
-    right: 0;
-    top: 0;
     height: 80px;
     padding: 8px;
 

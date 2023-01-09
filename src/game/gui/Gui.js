@@ -10,6 +10,7 @@ export default class Gui {
         this.$playButton = $('.play-button');
         this.$stopButton = $('.stop-button');
         this.$nextLevelButton = $('.next-level-button');
+        this.$scoreSpan = $('.score-number');
         this.isPlaying = false;
         this.isLevelDone = false;
 
@@ -59,6 +60,8 @@ export default class Gui {
         });
 
         this.setPlaying(false);
+        this.setLevelDone(false);
+        this.setScore(0);
     }
 
     #addCommand(unusedCommandIndex, usedCommandIndex = null) {
@@ -90,6 +93,8 @@ export default class Gui {
         if (this.game.isLevelDone !== this.isLevelDone) {
             this.setLevelDone(this.game.isLevelDone);
         }
+
+        this.setScore(this.game.score);
     }
 
     refillCommands() {
@@ -139,5 +144,9 @@ export default class Gui {
     setLevelDone(isLevelDone) {
         this.isLevelDone = isLevelDone;
         this.$nextLevelButton.prop('disabled', !!isLevelDone); // TODO: инвертировал для тестов, убрать один !
+    }
+
+    setScore(score) {
+        this.$scoreSpan.text(score);
     }
 }

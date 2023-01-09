@@ -1,5 +1,6 @@
 @import 'command-list.css';
 @import 'controls.css';
+@import 'status-bar.css';
 @import 'world.css';
 @import 'world-border.css';
 
@@ -41,6 +42,14 @@ body {
 
     background-image: url('../assets/images/gui/sidebar.png');
     background-position: top right;
+}
+
+.toolbar {
+    position: absolute;
+    display: flex;
+
+    right: 0;
+    top: 0;
 }
 
 .world-container {
