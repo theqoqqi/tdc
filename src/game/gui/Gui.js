@@ -67,6 +67,12 @@ export default class Gui {
             this.loadNextLevel();
         });
 
+        $(document).on('keydown', e => {
+            if (e.code === 'Enter') {
+                this.loadNextLevel();
+            }
+        });
+
         this.setPlaying(false);
         this.setLevelDone(false);
         this.setScore(0);
@@ -151,7 +157,7 @@ export default class Gui {
 
     setLevelDone(isLevelDone) {
         this.isLevelDone = isLevelDone;
-        this.$nextLevelButton.prop('disabled', !!isLevelDone); // TODO: инвертировал для тестов, убрать один !
+        this.$nextLevelButton.prop('disabled', !isLevelDone);
     }
 
     setScore(score) {
