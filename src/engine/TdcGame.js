@@ -12,6 +12,7 @@ export default class TdcGame {
         this.level = null;
         this.isPlaying = false;
         this.isLevelDone = false;
+        this.score = 0;
     }
 
 
