@@ -11,6 +11,7 @@ export default class TdcGame {
         this.commandExecutor = new CommandExecutor(this);
         this.level = null;
         this.isPlaying = false;
+        this.isLevelDone = false;
     }
 
 
@@ -71,6 +72,10 @@ export default class TdcGame {
     stop() {
         this.isPlaying = false;
         this.setPlayerPosition(this.level.start.x, this.level.start.y);
+    }
+
+    setLevelDone (bool) {
+        this.isLevelDone = bool;
     }
 
     loadLevelFromJson(level) {
