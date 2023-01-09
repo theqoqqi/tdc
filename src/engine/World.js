@@ -17,36 +17,7 @@ export default class World {
             object: true,
             className: 'finish',
         };
-        this.objects = [
-            // {
-            //     className: 'item',
-            //     type: 'apple',
-            //     x: 0,
-            //     y: 0,
-            //     z: 0,
-            // },
-            // {
-            //     className: 'item',
-            //     type: 'green-apple',
-            //     x: 0,
-            //     y: 0,
-            //     z: 0,
-            // },
-            // {
-            //     className: 'item',
-            //     type: 'cheese',
-            //     x: 0,
-            //     y: 0,
-            //     z: 0,
-            // },
-            // {
-            //     className: 'item',
-            //     type: 'mushroom',
-            //     x: 0,
-            //     y: 0,
-            //     z: 0,
-            // },
-        ];
+        this.objects = [];
     }
 
     getAllGameObjects() {
@@ -82,4 +53,8 @@ export default class World {
             && y >= 1 && y <= this.height
     }
 
+    removeObject (object) {
+        let index = this.objects.indexOf(object);
+        this.objects.splice (index, 1);
+    }
 }

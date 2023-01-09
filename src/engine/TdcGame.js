@@ -72,7 +72,7 @@ export default class TdcGame {
 
     stop() {
         this.isPlaying = false;
-        this.setPlayerPosition(this.level.start.x, this.level.start.y);
+        this.loadDynamicLevelData(this.level);
     }
 
     setLevelDone (bool) {
@@ -89,15 +89,29 @@ export default class TdcGame {
         }
     }
 
+    addScore (score) {
+        this.score += score;
+    }
+
     loadLevelFromJson(level) {
         this.level = level;
+
+        this.loadStaticLevelData(level);
+        this.loadDynamicLevelData(level);
+    }
+
+    loadDynamicLevelData(level) {
+        this.score = 0;
+        this.world.objects = [];
+        this.addObjects(level);
+        this.setPlayerPosition(level.start.x, level.start.y);
+    }
+
+    loadStaticLevelData(level) {
         this.usedCommandsList.commands = [];
         this.unusedCommandsList.commands = [];
-        this.world.objects = [];
         this.setSizeWorld(level.width, level.height);
-        this.setPlayerPosition(level.start.x, level.start.y);
         this.setFinishPosition(level.finish.x, level.finish.y);
         this.addCommands(level);
-        this.addObjects (level);
     }
 }

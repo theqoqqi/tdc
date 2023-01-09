@@ -80,6 +80,7 @@ export default class CommandExecutor {
                 }
 
                 this.move(step.direction);
+                this.collectItems();
 
                 if (this.isLevelDone()) {
                     this.game.setLevelDone(true);
@@ -91,7 +92,7 @@ export default class CommandExecutor {
         }
     }
 
-    shouldMove (direction) {
+    shouldMove(direction) {
         let x = this.world.player.x;
         let y = this.world.player.y;
         for (const command of this.moveCommands) {
@@ -100,12 +101,24 @@ export default class CommandExecutor {
                 y += command.dy;
             }
         }
-        return this.world.isInBounds (x, y);
+        return this.world.isInBounds(x, y);
     }
 
-    isLevelDone () {
+    isLevelDone() {
         let x = this.world.player.x;
         let y = this.world.player.y;
         return x === this.world.finish.x && y === this.world.finish.y
     }
+
+    collectItems() {
+        let x = this.world.player.x;
+        let y = this.world.player.y;
+        for (const object of this.world.objects) {
+            if (x === object.x && y === object.y) {
+                this.game.addScore (1);
+                this.world.removeObject (object);
+            }
+        }
+    }
+
 }
