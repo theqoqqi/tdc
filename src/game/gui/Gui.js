@@ -10,6 +10,7 @@ export default class Gui {
         this.$playButton = $('.play-button');
         this.$stopButton = $('.stop-button');
         this.$nextLevelButton = $('.next-level-button');
+        this.$scoreSpan = $('.score-number');
         this.isPlaying = false;
         this.isLevelDone = false;
 
@@ -30,6 +31,22 @@ export default class Gui {
             onUpdate: e => this.#reorderCommand(e.oldIndex, e.newIndex),
         });
 
+        this.$unusedCommands.on('click', '.command', e => {
+            let $command = $(e.currentTarget);
+            let index = $command.index();
+
+            this.$usedCommands.append($command);
+            this.#addCommand(index);
+        });
+
+        this.$usedCommands.on('click', '.command', e => {
+            let $command = $(e.currentTarget);
+            let index = $command.index();
+
+            this.$unusedCommands.append($command);
+            this.#removeCommand(index);
+        });
+
         this.$playButton.click(e => {
             this.play();
         });
@@ -43,16 +60,18 @@ export default class Gui {
         });
 
         this.setPlaying(false);
+        this.setLevelDone(false);
+        this.setScore(0);
     }
 
-    #addCommand(unusedCommandIndex, usedCommandIndex) {
+    #addCommand(unusedCommandIndex, usedCommandIndex = null) {
         let unusedCommands = this.game.getUnusedCommands();
         let command = unusedCommands[unusedCommandIndex];
 
         this.game.addCommand(command, usedCommandIndex);
     }
 
-    #removeCommand(usedCommandIndex, unusedCommandIndex) {
+    #removeCommand(usedCommandIndex, unusedCommandIndex = null) {
         let usedCommands = this.game.getUsedCommands();
         let command = usedCommands[usedCommandIndex];
 
@@ -74,6 +93,8 @@ export default class Gui {
         if (this.game.isLevelDone !== this.isLevelDone) {
             this.setLevelDone(this.game.isLevelDone);
         }
+
+        this.setScore(this.game.score);
     }
 
     refillCommands() {
@@ -123,5 +144,9 @@ export default class Gui {
     setLevelDone(isLevelDone) {
         this.isLevelDone = isLevelDone;
         this.$nextLevelButton.prop('disabled', !!isLevelDone); // TODO: инвертировал для тестов, убрать один !
+    }
+
+    setScore(score) {
+        this.$scoreSpan.text(score);
     }
 }

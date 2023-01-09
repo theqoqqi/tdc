@@ -12,8 +12,8 @@ export default class CommandList {
         return commands;
     }
 
-    addCommand(command, index = undefined) {
-        if (index !== undefined) {
+    addCommand(command, index = null) {
+        if (typeof index === 'number') {
             this.commands.splice (index, 0, command);
         } else {
             this.commands.push (command);

@@ -6,9 +6,18 @@ export default class SpriteAtlas {
 
     #texturePath;
 
+    #sourceWidth;
+
+    #sourceHeight;
+
+    #scale;
+
     constructor(options) {
         this.#sprites = this.generateSprites(options);
         this.#texturePath = options.texturePath;
+        this.#sourceWidth = options.sourceWidth ?? options.spriteWidth * options.columns;
+        this.#sourceHeight = options.sourceHeight ?? options.spriteHeight * options.rows;
+        this.#scale = options.scale ?? 1;
     }
 
     generateSprites({spriteWidth, spriteHeight, rows, columns}) {
@@ -39,5 +48,17 @@ export default class SpriteAtlas {
 
     get texturePath() {
         return this.#texturePath;
+    }
+
+    get sourceWidth() {
+        return this.#sourceWidth;
+    }
+
+    get sourceHeight() {
+        return this.#sourceHeight;
+    }
+
+    get scale() {
+        return this.#scale;
     }
 }
