@@ -30,6 +30,22 @@ export default class Gui {
             onUpdate: e => this.#reorderCommand(e.oldIndex, e.newIndex),
         });
 
+        this.$unusedCommands.on('click', '.command', e => {
+            let $command = $(e.currentTarget);
+            let index = $command.index();
+
+            this.$usedCommands.append($command);
+            this.#addCommand(index);
+        });
+
+        this.$usedCommands.on('click', '.command', e => {
+            let $command = $(e.currentTarget);
+            let index = $command.index();
+
+            this.$unusedCommands.append($command);
+            this.#removeCommand(index);
+        });
+
         this.$playButton.click(e => {
             this.play();
         });
@@ -45,14 +61,14 @@ export default class Gui {
         this.setPlaying(false);
     }
 
-    #addCommand(unusedCommandIndex, usedCommandIndex) {
+    #addCommand(unusedCommandIndex, usedCommandIndex = null) {
         let unusedCommands = this.game.getUnusedCommands();
         let command = unusedCommands[unusedCommandIndex];
 
         this.game.addCommand(command, usedCommandIndex);
     }
 
-    #removeCommand(usedCommandIndex, unusedCommandIndex) {
+    #removeCommand(usedCommandIndex, unusedCommandIndex = null) {
         let usedCommands = this.game.getUsedCommands();
         let command = usedCommands[usedCommandIndex];
 
