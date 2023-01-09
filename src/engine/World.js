@@ -59,6 +59,7 @@ export default class World {
         for (const object of this.objects) {
             objects.push(object);
         }
+        console.log(objects)
         return objects;
     }
 
@@ -81,4 +82,5 @@ export default class World {
         return x >= 1 && x <= this.width
             && y >= 1 && y <= this.height
     }
+
 }

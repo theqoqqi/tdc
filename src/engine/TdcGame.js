@@ -78,13 +78,25 @@ export default class TdcGame {
         this.isLevelDone = bool;
     }
 
+    addObjects (level) {
+        if (!level.objects) {
+            return
+        }
+        for (const object of level.objects) {
+            object.z = 0;
+            this.world.objects.push (object);
+        }
+    }
+
     loadLevelFromJson(level) {
         this.level = level;
         this.usedCommandsList.commands = [];
         this.unusedCommandsList.commands = [];
+        this.world.objects = [];
         this.setSizeWorld(level.width, level.height);
         this.setPlayerPosition(level.start.x, level.start.y);
         this.setFinishPosition(level.finish.x, level.finish.y);
         this.addCommands(level);
+        this.addObjects (level);
     }
 }
