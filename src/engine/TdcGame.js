@@ -75,21 +75,37 @@ export default class TdcGame {
         this.loadDynamicLevelData(this.level);
     }
 
-    setLevelDone (bool) {
+    setLevelDone(bool) {
         this.isLevelDone = bool;
     }
 
-    addObjects (level) {
+    setPlaying(bool) {
+        this.isPlaying = bool;
+    }
+
+    addObjects(level) {
         if (!level.objects) {
             return
         }
         for (const object of level.objects) {
+            if (object.type === 'apple') {
+                object.score = 1;
+            }
+            if (object.type === 'green-apple') {
+                object.score = 2;
+            }
+            if (object.type === 'cheese') {
+                object.score = 3;
+            }
+            if (object.type === 'mushroom') {
+                object.score = 4;
+            }
             object.z = 0;
-            this.world.objects.push (object);
+            this.world.objects.push(object);
         }
     }
 
-    addScore (score) {
+    addScore(score) {
         this.score += score;
     }
 
@@ -108,6 +124,8 @@ export default class TdcGame {
     }
 
     loadStaticLevelData(level) {
+        this.setPlaying(false);
+        this.setLevelDone(false);
         this.usedCommandsList.commands = [];
         this.unusedCommandsList.commands = [];
         this.setSizeWorld(level.width, level.height);

@@ -115,7 +115,7 @@ export default class CommandExecutor {
         let y = this.world.player.y;
         for (const object of this.world.objects) {
             if (x === object.x && y === object.y) {
-                this.game.addScore (1);
+                this.game.addScore (object.score);
                 this.world.removeObject (object);
             }
         }
