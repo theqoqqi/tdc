@@ -8,52 +8,28 @@ export default class SpriteAtlases {
         spriteHeight: 32,
         columns: 8,
         rows: 4,
+        scale: 2,
+    });
+
+    static #defaultAtlas = new SpriteAtlas({
+        texturePath: 'assets/images/not-found.png',
+        spriteWidth: 64,
+        spriteHeight: 64,
+        columns: 1,
+        rows: 1,
     });
 
     static #gameObjectAtlases = {
-        player: new SpriteAtlas({
-            texturePath: 'assets/images/objects/player.png',
-            spriteWidth: 64,
-            spriteHeight: 64,
+        player: SpriteAtlases.#createObjectAtlas('player', {
             columns: 2,
             rows: 2,
         }),
-        finish: new SpriteAtlas({
-            texturePath: 'assets/images/objects/finish.png',
-            spriteWidth: 64,
-            spriteHeight: 64,
-            columns: 1,
-            rows: 1,
-        }),
+        finish: SpriteAtlases.#createObjectAtlas('finish'),
         item: {
-            apple: new SpriteAtlas({
-                texturePath: 'assets/images/objects/items/apple.png',
-                spriteWidth: 32,
-                spriteHeight: 32,
-                columns: 1,
-                rows: 1,
-            }),
-            'green-apple': new SpriteAtlas({
-                texturePath: 'assets/images/objects/items/green-apple.png',
-                spriteWidth: 32,
-                spriteHeight: 32,
-                columns: 1,
-                rows: 1,
-            }),
-            cheese: new SpriteAtlas({
-                texturePath: 'assets/images/objects/items/cheese.png',
-                spriteWidth: 32,
-                spriteHeight: 32,
-                columns: 1,
-                rows: 1,
-            }),
-            mushroom: new SpriteAtlas({
-                texturePath: 'assets/images/objects/items/mushroom.png',
-                spriteWidth: 32,
-                spriteHeight: 32,
-                columns: 1,
-                rows: 1,
-            }),
+            apple: SpriteAtlases.#createObjectAtlas('items/apple'),
+            'green-apple': SpriteAtlases.#createObjectAtlas('items/green-apple'),
+            cheese: SpriteAtlases.#createObjectAtlas('items/cheese'),
+            mushroom: SpriteAtlases.#createObjectAtlas('items/mushroom'),
         }
     };
 
@@ -65,13 +41,23 @@ export default class SpriteAtlases {
         let atlas = this.#gameObjectAtlases[className];
 
         if (!atlas) {
-            return null; // TODO: добавить атлас по умолчанию
+            return this.#defaultAtlas;
         }
 
         if (!(atlas instanceof SpriteAtlas)) {
             atlas = atlas[type];
         }
 
-        return atlas ?? null; // TODO: добавить атлас по умолчанию
+        return atlas ?? this.#defaultAtlas;
+    }
+
+    static #createObjectAtlas(atlasSubPath, {columns = 1, rows = 1} = {}) {
+        return new SpriteAtlas({
+            texturePath: `assets/images/objects/${atlasSubPath}.png`,
+            spriteWidth: 64,
+            spriteHeight: 64,
+            columns,
+            rows,
+        });
     }
 }

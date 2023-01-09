@@ -131,6 +131,9 @@ export default class WorldRenderer {
         let $tile = $(`<div class='grid-tile ${type}'>`);
         let $container = type === 'terrain-tile' ? this.$terrain : this.$objects;
 
+        let bgWidth = sprite.atlas.sourceWidth * sprite.atlas.scale;
+        let bgHeight = sprite.atlas.sourceHeight * sprite.atlas.scale;
+
         $tile.css({
             left: this.gamePosToCssPos(x),
             top: this.gamePosToCssPos(y),
@@ -138,6 +141,7 @@ export default class WorldRenderer {
             backgroundImage: `url('${sprite.atlas.texturePath}')`,
             backgroundPositionX: -sprite.x * this.#pixelScale + 'px',
             backgroundPositionY: -sprite.y * this.#pixelScale + 'px',
+            backgroundSize: `${bgWidth}px ${bgHeight}px`,
         });
 
         $container.append($tile);
