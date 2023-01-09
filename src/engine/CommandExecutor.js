@@ -64,23 +64,36 @@ export default class CommandExecutor {
     async run() {
         let runId = ++this.currentRunId;
         let commands = this.game.getUsedCommands();
-        for (let i = 0; i < commands.length; i++) {
-            for (let j = 0; j < commands[i].steps.length; j++) {
-                if (this.game.isPlaying && this.shouldMove(commands[i].steps[j].direction) && runId === this.currentRunId) {
-                    this.move(commands[i].steps[j].direction);
-                    await this.sleep(500);
-                    // console.log(this.world.player.x);
-                    // console.log(this.world.player.y);
-                } else {
+
+        for (const command of commands) {
+            for (const step of command.steps) {
+                if (!this.game.isPlaying) {
                     return;
                 }
+
+                if (runId !== this.currentRunId) {
+                    return;
+                }
+
+                if (!this.shouldMove(step.direction)) {
+                    return;
+                }
+
+                this.move(step.direction);
+
+                if (this.isLevelDone()) {
+                    this.game.setLevelDone(true);
+                    return;
+                }
+
+                await this.sleep(500);
             }
         }
     }
 
     shouldMove (direction) {
         let x = this.world.player.x;
-        let y = this.world.player.y
+        let y = this.world.player.y;
         for (const command of this.moveCommands) {
             if (direction === command.direction) {
                 x += command.dx;
@@ -88,5 +101,11 @@ export default class CommandExecutor {
             }
         }
         return this.world.isInBounds (x, y);
+    }
+
+    isLevelDone () {
+        let x = this.world.player.x;
+        let y = this.world.player.y;
+        return x === this.world.finish.x && y === this.world.finish.y
     }
 }

@@ -6,40 +6,46 @@ export default class World {
         this.player = {
             x: 0,
             y: 0,
+            z: 1,
             object: true,
             className: 'player',
         };
         this.finish = {
             x: 0,
             y: 0,
+            z: 0,
             object: true,
             className: 'finish',
         };
         this.objects = [
-        //     {
-        //         className: 'item',
-        //         type: 'apple',
-        //         x: 0,
-        //         y: 0,
-        //     },
-        //     {
-        //         className: 'item',
-        //         type: 'green-apple',
-        //         x: 0,
-        //         y: 0,
-        //     },
-        //     {
-        //         className: 'item',
-        //         type: 'cheese',
-        //         x: 0,
-        //         y: 0,
-        //     },
-        //     {
-        //         className: 'item',
-        //         type: 'mushroom',
-        //         x: 0,
-        //         y: 0,
-        //     },
+            // {
+            //     className: 'item',
+            //     type: 'apple',
+            //     x: 0,
+            //     y: 0,
+            //     z: 0,
+            // },
+            // {
+            //     className: 'item',
+            //     type: 'green-apple',
+            //     x: 0,
+            //     y: 0,
+            //     z: 0,
+            // },
+            // {
+            //     className: 'item',
+            //     type: 'cheese',
+            //     x: 0,
+            //     y: 0,
+            //     z: 0,
+            // },
+            // {
+            //     className: 'item',
+            //     type: 'mushroom',
+            //     x: 0,
+            //     y: 0,
+            //     z: 0,
+            // },
         ];
     }
 
