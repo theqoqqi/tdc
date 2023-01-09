@@ -134,7 +134,7 @@ export default class WorldRenderer {
         $tile.css({
             left: this.gamePosToCssPos(x),
             top: this.gamePosToCssPos(y),
-            zIndex: z + 'px',
+            zIndex: z,
             backgroundImage: `url('${sprite.atlas.texturePath}')`,
             backgroundPositionX: -sprite.x * this.#pixelScale + 'px',
             backgroundPositionY: -sprite.y * this.#pixelScale + 'px',
