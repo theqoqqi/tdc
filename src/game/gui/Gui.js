@@ -32,6 +32,10 @@ export default class Gui {
         });
 
         this.$unusedCommands.on('click', '.command', e => {
+            if (this.isPlaying) {
+                return;
+            }
+
             let $command = $(e.currentTarget);
             let index = $command.index();
 
@@ -40,6 +44,10 @@ export default class Gui {
         });
 
         this.$usedCommands.on('click', '.command', e => {
+            if (this.isPlaying) {
+                return;
+            }
+
             let $command = $(e.currentTarget);
             let index = $command.index();
 
