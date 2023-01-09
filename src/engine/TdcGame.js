@@ -88,6 +88,18 @@ export default class TdcGame {
             return
         }
         for (const object of level.objects) {
+            if (object.type === 'apple') {
+                object.score = 1;
+            }
+            if (object.type === 'green-apple') {
+                object.score = 2;
+            }
+            if (object.type === 'cheese') {
+                object.score = 3;
+            }
+            if (object.type === 'mushroom') {
+                object.score = 4;
+            }
             object.z = 0;
             this.world.objects.push(object);
         }
