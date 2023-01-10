@@ -77,11 +77,11 @@ const level3 = {
         {
             type: 'move',
             steps: [
-                'up-left',
                 'up',
                 'up-right',
-                'up-right',
-                'up-right',
+                'right',
+                'right',
+                'right',
             ],
         },
         {
