@@ -66,7 +66,7 @@
 
 .world.playing .object-tile.player {
     transform-origin: 32px 60px;
-    animation: walking .5s infinite;
+    animation: walking .8s infinite;
     image-rendering: auto;
 }
 
@@ -75,13 +75,13 @@
         transform: scaleY(1) rotateZ(0);
     }
     25% {
-        transform: scaleY(0.95) rotateZ(-5deg) translate(-2px, 2px);
+        transform: scaleY(0.9) rotateZ(-5deg) translate(-1px, 1px);
     }
     50% {
-        transform: scaleY(0.9) rotateZ(0);
+        transform: scaleY(1) rotateZ(0);
     }
     75% {
-        transform: scaleY(0.95) rotateZ(5deg) translate(2px, 2px);
+        transform: scaleY(0.9) rotateZ(5deg) translate(1px, 1px);
     }
     to {
         transform: scaleY(1) rotateZ(0);
