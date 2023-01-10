@@ -42,14 +42,13 @@
     transition: .4s;
 
     z-index: 1000;
-    pointer-events: none;
 }
 
 .object-tile.destroyed {
-    animation: destroyed 1s;
+    animation: destroying 1s;
 }
 
-@keyframes destroyed {
+@keyframes destroying {
     from {
         z-index: 2000;
     }
