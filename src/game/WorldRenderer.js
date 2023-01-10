@@ -3,6 +3,8 @@ import SpriteAtlases from './graphics/SpriteAtlases.js';
 
 export default class WorldRenderer {
 
+    static #destroyAnimationDuration = 1000;
+
     #tileSize = 64;
 
     #pixelScale = 2;
@@ -84,8 +86,13 @@ export default class WorldRenderer {
         let $gameObject = this.getObjectElement(gameObject);
 
         if ($gameObject) {
-            $gameObject.remove();
+            $gameObject.addClass('destroyed');
             this.#objectsToElements.delete(gameObject);
+
+            setTimeout(
+                () => $gameObject.remove(),
+                WorldRenderer.#destroyAnimationDuration
+            );
         }
     }
 

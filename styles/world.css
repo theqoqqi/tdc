@@ -44,3 +44,21 @@
     z-index: 1000;
     pointer-events: none;
 }
+
+.object-tile.destroyed {
+    animation: destroyed 1s;
+}
+
+@keyframes destroyed {
+    from {
+        z-index: 2000;
+    }
+    20% {
+        opacity: 1;
+        transform: none;
+    }
+    to {
+        opacity: 0;
+        transform: rotateZ(360deg) scale(1.5);
+    }
+}
