@@ -7,19 +7,22 @@ export default class WorldRenderer {
 
     #pixelScale = 2;
 
+    #htmlGame;
+
     #game;
 
     #world;
 
     #objectsToElements = new Map();
 
-    constructor(selector, game) {
+    constructor(selector, htmlGame) {
         this.$world = $(selector);
         this.$terrain = this.$world.find('.terrain');
         this.$objects = this.$world.find('.objects');
 
-        this.#game = game;
-        this.#world = game.world;
+        this.#htmlGame = htmlGame;
+        this.#game = htmlGame.game;
+        this.#world = htmlGame.game.world;
     }
 
     render() {
@@ -150,7 +153,7 @@ export default class WorldRenderer {
     }
 
     getRandomGrassSprite(x, y) {
-        let random = new Random(x + '-' + y);
+        let random = new Random(this.#htmlGame.currentLevel + '-' + x + '-' + y);
         let spriteX = random.nextInt(4);
         let spriteY = random.nextInt(4);
         let withFlowers = random.nextInt(8) === 0;

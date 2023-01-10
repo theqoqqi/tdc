@@ -17,7 +17,7 @@ export default class HtmlTdcGame {
 
     constructor() {
         this.game = new TdcGame();
-        this.worldRenderer = new WorldRenderer('.world', this.game);
+        this.worldRenderer = new WorldRenderer('.world', this);
         this.gui = new Gui(this);
 
         this.loadNextLevel();
@@ -44,5 +44,9 @@ export default class HtmlTdcGame {
     update() {
         this.worldRenderer.update();
         this.gui.update();
+    }
+
+    get currentLevel() {
+        return this.#currentLevel;
     }
 }
