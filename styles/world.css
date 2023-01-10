@@ -61,3 +61,29 @@
         transform: rotateZ(360deg) scale(1.5);
     }
 }
+
+
+
+.world.playing .object-tile.player {
+    transform-origin: 32px 60px;
+    animation: walking .5s infinite;
+    image-rendering: auto;
+}
+
+@keyframes walking {
+    from {
+        transform: scaleY(1) rotateZ(0);
+    }
+    25% {
+        transform: scaleY(0.95) rotateZ(-5deg) translate(-2px, 2px);
+    }
+    50% {
+        transform: scaleY(0.9) rotateZ(0);
+    }
+    75% {
+        transform: scaleY(0.95) rotateZ(5deg) translate(2px, 2px);
+    }
+    to {
+        transform: scaleY(1) rotateZ(0);
+    }
+}

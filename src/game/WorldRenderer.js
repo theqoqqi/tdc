@@ -36,6 +36,8 @@ export default class WorldRenderer {
     }
 
     update() {
+        this.$world.toggleClass('playing', this.#game.isPlaying);
+
         for (const $gameObject of this.#objectsToElements.values()) {
             $gameObject.data('removed', true);
         }
@@ -116,7 +118,7 @@ export default class WorldRenderer {
             x,
             y,
             z: 0,
-            type: 'terrain-tile',
+            layer: 'terrain-tile',
             sprite: this.getRandomGrassSprite(x, y),
         });
     }
@@ -126,7 +128,8 @@ export default class WorldRenderer {
             x: gameObject.x,
             y: gameObject.y,
             z: 1000 + gameObject.z,
-            type: 'object-tile',
+            layer: 'object-tile',
+            className: gameObject.className,
             sprite: this.getSpriteFor(gameObject),
         });
     }
@@ -137,9 +140,9 @@ export default class WorldRenderer {
         this.#objectsToElements.clear();
     }
 
-    renderTile({type, x, y, z, sprite}) {
-        let $tile = $(`<div class='grid-tile ${type}'>`);
-        let $container = type === 'terrain-tile' ? this.$terrain : this.$objects;
+    renderTile({layer, className = '', x, y, z, sprite}) {
+        let $tile = $(`<div class='grid-tile ${layer} ${className}'>`);
+        let $container = layer === 'terrain-tile' ? this.$terrain : this.$objects;
 
         let bgWidth = sprite.atlas.sourceWidth * sprite.atlas.scale;
         let bgHeight = sprite.atlas.sourceHeight * sprite.atlas.scale;
