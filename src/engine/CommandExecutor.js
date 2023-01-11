@@ -4,57 +4,47 @@ export default class CommandExecutor {
         this.world = game.world;
         this.game = game;
         this.currentRunId = 0;
-        this.moveCommands = [
-            {
-                direction: 'right',
+        this.directionDeltas = {
+            'right': {
                 dx: 1,
                 dy: 0,
             },
-            {
-                direction: 'up',
+            'up': {
                 dx: 0,
                 dy: -1,
             },
-            {
-                direction: 'up-right',
+            'up-right': {
                 dx: 1,
                 dy: -1,
             },
-            {
-                direction: 'left',
+            'left': {
                 dx: -1,
                 dy: 0,
             },
-            {
-                direction: 'up-left',
+            'up-left': {
                 dx: -1,
                 dy: -1,
             },
-            {
-                direction: 'down',
+            'down': {
                 dx: 0,
                 dy: 1,
             },
-            {
-                direction: 'down-left',
+            'down-left': {
                 dx: -1,
                 dy: 1,
             },
-            {
-                direction: 'down-right',
+            'down-right': {
                 dx: 1,
                 dy: 1,
             },
-        ];
+        };
     }
 
     move(direction) {
-        for (const command of this.moveCommands) {
-            if (direction === command.direction) {
-                this.world.player.x += command.dx;
-                this.world.player.y += command.dy;
-            }
-        }
+        let delta = this.directionDeltas[direction];
+
+        this.world.player.x += delta.dx;
+        this.world.player.y += delta.dy;
     }
 
     sleep(ms) {
@@ -95,28 +85,36 @@ export default class CommandExecutor {
     shouldMove(direction) {
         let x = this.world.player.x;
         let y = this.world.player.y;
-        for (const command of this.moveCommands) {
-            if (direction === command.direction) {
-                x += command.dx;
-                y += command.dy;
-            }
+        let delta = this.directionDeltas[direction];
+        let isTargetPassable = this.world.isCellPassable(x + delta.dx, y + delta.dy);
+
+        if (delta.x !== 0 && delta.y !== 0) {
+            let isXNeighborPassable = this.world.isCellPassable(x + delta.dx, y);
+            let isYNeighborPassable = this.world.isCellPassable(x, y + delta.dy);
+
+            return isXNeighborPassable
+                && isYNeighborPassable
+                && isTargetPassable;
         }
-        return this.world.isInBounds(x, y);
+
+        return isTargetPassable;
     }
 
     isLevelDone() {
         let x = this.world.player.x;
         let y = this.world.player.y;
+
         return x === this.world.finish.x && y === this.world.finish.y
     }
 
     collectItems() {
         let x = this.world.player.x;
         let y = this.world.player.y;
+
         for (const object of this.world.objects) {
             if (x === object.x && y === object.y && object.className === 'item') {
-                this.game.addScore (object.score);
-                this.world.removeObject (object);
+                this.game.addScore(object.score);
+                this.world.removeObject(object);
             }
         }
     }

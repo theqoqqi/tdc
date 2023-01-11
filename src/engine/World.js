@@ -42,6 +42,18 @@ export default class World {
             && y >= 1 && y <= this.height
     }
 
+    isCellPassable (x, y) {
+        if (!this.isInBounds(x, y)) {
+            return false
+        }
+        for (const object of this.objects) {
+            if (object.className === 'obstacle' && x ===object.x && y === object.y) {
+                return false
+            }
+        }
+        return true
+    }
+
     removeObject(object) {
         let index = this.objects.indexOf(object);
         this.objects.splice(index, 1);
