@@ -17,14 +17,28 @@ export default class WorldRenderer {
 
     #objectsToElements = new Map();
 
+    #hoveredTilePosition = {x: 0, y: 0};
+
     constructor(selector, htmlGame) {
         this.$world = $(selector);
         this.$terrain = this.$world.find('.terrain');
         this.$objects = this.$world.find('.objects');
+        this.$selectionTile = this.$world.find('.selection-tile');
 
         this.#htmlGame = htmlGame;
         this.#game = htmlGame.game;
         this.#world = htmlGame.game.world;
+
+        $(document).mousemove(e => {
+            let rect = this.$world[0].getBoundingClientRect();
+            let x = e.clientX - rect.left;
+            let y = e.clientY - rect.top;
+
+            this.#hoveredTilePosition = {
+                x: Math.floor(x / this.#tileSize) + 1,
+                y: Math.floor(y / this.#tileSize) + 1,
+            };
+        });
     }
 
     render() {
@@ -37,6 +51,7 @@ export default class WorldRenderer {
 
     update() {
         this.$world.toggleClass('playing', this.#game.isPlaying);
+        this.updateSelection();
 
         for (const $gameObject of this.#objectsToElements.values()) {
             $gameObject.data('removed', true);
@@ -60,6 +75,21 @@ export default class WorldRenderer {
                 this.removeObjectElement(gameObject);
             }
         }
+    }
+
+    updateSelection() {
+        let {x, y} = this.#hoveredTilePosition;
+
+        if (!this.#world.isInBounds(x, y)) {
+            this.$selectionTile.hide();
+            return null;
+        }
+
+        this.$selectionTile.show();
+        this.$selectionTile.css({
+            left: this.gamePosToCssPos(x),
+            top: this.gamePosToCssPos(y),
+        });
     }
 
     getOrCreateObjectElement(gameObject) {
@@ -177,7 +207,7 @@ export default class WorldRenderer {
 
     getSpriteFor(gameObject) {
         return SpriteAtlases
-            .get(gameObject.className, gameObject.type)
+            .get(gameObject.className, gameObject.type, gameObject.variant)
             .getSprite(0, 0);
     }
 
