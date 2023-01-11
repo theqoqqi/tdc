@@ -1,8 +1,19 @@
 import World from '../engine/World.js';
 import CommandList from '../engine/CommandList.js';
 import CommandExecutor from '../engine/CommandExecutor.js';
+import Item from "./gameObjects/Item.js";
+import Obstacle from "./gameObjects/Obstacle.js";
+import Finish from "./gameObjects/Finish.js";
+import Player from "./gameObjects/Player.js";
 
 export default class TdcGame {
+
+    static gameObjectClasses = {
+        player: Player,
+        finish: Finish,
+        item: Item,
+        obstacle: Obstacle,
+    };
 
     constructor() {
         this.world = new World();
@@ -78,7 +89,9 @@ export default class TdcGame {
         if (!level.objects) {
             return
         }
-        for (const object of level.objects) {
+        for (const objectJson of level.objects) {
+            let gameObjectClass = TdcGame.gameObjectClasses[objectJson.className];
+            let object = new gameObjectClass (objectJson);
             if (object.type === 'apple') {
                 object.score = 1;
             }
@@ -91,7 +104,6 @@ export default class TdcGame {
             if (object.type === 'mushroom') {
                 object.score = 4;
             }
-            object.z = 0;
             this.world.objects.push(object);
         }
     }

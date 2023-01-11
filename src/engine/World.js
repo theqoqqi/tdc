@@ -1,3 +1,6 @@
+import Player from "./gameObjects/Player.js";
+import Finish from "./gameObjects/Finish.js";
+
 export default class World {
 
     constructor() {
@@ -7,23 +10,19 @@ export default class World {
     }
 
     addPlayer(x, y) {
-        let player = {
+        let player = new Player({
             x: x,
             y: y,
-            z: 1,
-            className: 'player',
-        };
+        });
         this.player = player;
         this.addObject(player);
     }
 
     addFinish(x, y) {
-        let finish = {
+        let finish = new Finish({
             x: x,
             y: y,
-            z: 0,
-            className: 'finish',
-        };
+        });
         this.finish = finish;
         this.addObject(finish);
     }
@@ -42,12 +41,12 @@ export default class World {
             && y >= 1 && y <= this.height
     }
 
-    isCellPassable (x, y) {
+    isCellPassable(x, y) {
         if (!this.isInBounds(x, y)) {
             return false
         }
         for (const object of this.objects) {
-            if (object.className === 'obstacle' && x ===object.x && y === object.y) {
+            if (object.className === 'obstacle' && x === object.x && y === object.y) {
                 return false
             }
         }
