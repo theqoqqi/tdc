@@ -18,8 +18,8 @@
     width: 64px;
     height: 64px;
 
-    background-image: url('../assets/images/grass.png');
     background-clip: border-box;
+    background-origin: border-box;
 
     image-rendering: pixelated;
 }
@@ -27,15 +27,8 @@
 .terrain-tile {
     border: 1px solid #0002;
 
-    background-origin: border-box;
+    background-image: url('../assets/images/grass.png');
     background-size: 512px 256px;
-}
-
-.terrain-tile:hover {
-    border-color: #fff4;
-    box-shadow: #fffb 0 0 2px 0;
-
-    z-index: 1;
 }
 
 .object-tile {
@@ -46,6 +39,14 @@
 
 .object-tile.destroyed {
     animation: destroying 1s;
+}
+
+.selection-tile {
+    border: 1px solid #fff4;
+    box-shadow: #fffb 0 0 2px 0;
+
+    z-index: 10000;
+    pointer-events: none;
 }
 
 @keyframes destroying {
