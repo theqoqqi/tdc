@@ -3,49 +3,38 @@ export default class World {
     constructor() {
         this.width = 0;
         this.height = 0;
-        this.player = {
-            x: 0,
-            y: 0,
+        this.objects = [];
+    }
+
+    addPlayer(x, y) {
+        let player = {
+            x: x,
+            y: y,
             z: 1,
-            object: true,
             className: 'player',
         };
-        this.finish = {
-            x: 0,
-            y: 0,
+        this.player = player;
+        this.addObject(player);
+    }
+
+    addFinish(x, y) {
+        let finish = {
+            x: x,
+            y: y,
             z: 0,
-            object: true,
             className: 'finish',
         };
-        this.objects = [this.player, this.finish];
+        this.finish = finish;
+        this.addObject(finish);
     }
 
     getAllGameObjects() {
-        // let objects = [];
-        // for (let worldKey in this) {
-        //     if (this[worldKey].object === true) {
-        //         objects.push(this[worldKey]);
-        //     }
-        // }
-        // for (const object of this.objects) {
-        //     objects.push(object);
-        // }
         return this.objects;
     }
 
-    setSizeWorld(width, height) {
+    setWorldSize(width, height) {
         this.width = width;
         this.height = height;
-    }
-
-    setPlayerPosition(x, y) {
-        this.player.x = x;
-        this.player.y = y;
-    }
-
-    setFinishPosition(x, y) {
-        this.finish.x = x;
-        this.finish.y = y;
     }
 
     isInBounds(x, y) {
@@ -53,8 +42,12 @@ export default class World {
             && y >= 1 && y <= this.height
     }
 
-    removeObject (object) {
+    removeObject(object) {
         let index = this.objects.indexOf(object);
-        this.objects.splice (index, 1);
+        this.objects.splice(index, 1);
+    }
+
+    addObject(object) {
+        this.objects.push(object);
     }
 }

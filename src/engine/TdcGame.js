@@ -15,17 +15,8 @@ export default class TdcGame {
         this.score = 0;
     }
 
-
-    setSizeWorld(width, height) {
-        this.world.setSizeWorld(width, height);
-    }
-
-    setPlayerPosition(x, y) {
-        this.world.setPlayerPosition(x, y);
-    }
-
-    setFinishPosition(x, y) {
-        this.world.setFinishPosition(x, y);
+    setWorldSize(width, height) {
+        this.world.setWorldSize(width, height);
     }
 
     getUnusedCommands() {
@@ -120,7 +111,8 @@ export default class TdcGame {
         this.score = 0;
         this.world.objects = [];
         this.addObjects(level);
-        this.setPlayerPosition(level.start.x, level.start.y);
+        this.world.addPlayer(level.start.x, level.start.y);
+        this.world.addFinish(level.finish.x, level.finish.y);
     }
 
     loadStaticLevelData(level) {
@@ -128,8 +120,7 @@ export default class TdcGame {
         this.setLevelDone(false);
         this.usedCommandsList.commands = [];
         this.unusedCommandsList.commands = [];
-        this.setSizeWorld(level.width, level.height);
-        this.setFinishPosition(level.finish.x, level.finish.y);
+        this.setWorldSize(level.width, level.height);
         this.addCommands(level);
     }
 }
