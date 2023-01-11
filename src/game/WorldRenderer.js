@@ -177,7 +177,7 @@ export default class WorldRenderer {
 
     getSpriteFor(gameObject) {
         return SpriteAtlases
-            .get(gameObject.className, gameObject.type)
+            .get(gameObject.className, gameObject.type, gameObject.variant)
             .getSprite(0, 0);
     }
 
