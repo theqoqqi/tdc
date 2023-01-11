@@ -17,20 +17,20 @@ export default class World {
             object: true,
             className: 'finish',
         };
-        this.objects = [];
+        this.objects = [this.player, this.finish];
     }
 
     getAllGameObjects() {
-        let objects = [];
-        for (let worldKey in this) {
-            if (this[worldKey].object === true) {
-                objects.push(this[worldKey]);
-            }
-        }
-        for (const object of this.objects) {
-            objects.push(object);
-        }
-        return objects;
+        // let objects = [];
+        // for (let worldKey in this) {
+        //     if (this[worldKey].object === true) {
+        //         objects.push(this[worldKey]);
+        //     }
+        // }
+        // for (const object of this.objects) {
+        //     objects.push(object);
+        // }
+        return this.objects;
     }
 
     setSizeWorld(width, height) {
