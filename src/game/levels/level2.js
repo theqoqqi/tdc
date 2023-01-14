@@ -1,6 +1,7 @@
 const level1 = {
     width: 7,
     height: 7,
+    initialScore: 100,
     start: {x: 4, y: 7},
     finish: {x: 4, y: 1},
     objects: [
@@ -35,70 +36,16 @@ const level1 = {
             steps: [
                 'up',
                 'up-right',
-            ]
-        },
-        {
-            type: 'move',
-            steps: [
-                'up',
-                'up-right',
-            ]
-        },
-        {
-            type: 'move',
-            steps: [
-                'up',
-                'up-right',
-            ]
-        },
-        {
-            type: 'move',
-            steps: [
-                'up',
-                'up-right',
-            ]
-        },
-        {
-            type: 'move',
-            steps: [
-                'up',
-                'up-right',
-            ]
-        },
-        {
-            type: 'move',
-            steps: [
-                'up',
-                'up-right',
-            ]
+            ],
+            count: 6,
         },
         {
             type: 'move',
             steps: [
                 'left',
                 'down-left',
-            ]
-        },
-        {
-            type: 'move',
-            steps: [
-                'left',
-                'down-left',
-            ]
-        },
-        {
-            type: 'move',
-            steps: [
-                'left',
-                'down-left',
-            ]
-        },
-        {
-            type: 'move',
-            steps: [
-                'left',
-                'down-left',
-            ]
+            ],
+            count: 4,
         },
         {
             type: 'move',
@@ -106,29 +53,16 @@ const level1 = {
                 'left',
                 'left',
                 'down-left',
-            ]
-        },
-        {
-            type: 'move',
-            steps: [
-                'left',
-                'left',
-                'down-left',
-            ]
+            ],
+            count: 2,
         },
         {
             type: 'move',
             steps: [
                 'down-right',
                 'down-right',
-            ]
-        },
-        {
-            type: 'move',
-            steps: [
-                'down-right',
-                'down-right',
-            ]
+            ],
+            count: 2,
         },
         {
             type: 'move',

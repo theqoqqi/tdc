@@ -1,6 +1,7 @@
 const level3 = {
     width: 7,
     height: 7,
+    initialScore: 100,
     start: {x: 1, y: 7},
     finish: {x: 1, y: 3},
     objects: [
