@@ -40,11 +40,11 @@ export default class CommandExecutor {
         };
     }
 
-    move(direction) {
+    move(direction, distance = 1) {
         let delta = this.directionDeltas[direction];
 
-        this.world.player.x += delta.dx;
-        this.world.player.y += delta.dy;
+        this.world.player.x += delta.dx * distance;
+        this.world.player.y += delta.dy * distance;
     }
 
     sleep(ms) {
@@ -65,11 +65,18 @@ export default class CommandExecutor {
                     return;
                 }
 
+                if (this.game.score -1 < 0) {
+                    return;
+                }
+
                 if (!this.shouldMove(step.direction)) {
+                    this.move(step.direction, 0.3);
+                    this.world.player.kill();
                     return;
                 }
 
                 this.move(step.direction);
+                this.game.addScore(-1);
                 this.collectItems();
 
                 if (this.isLevelDone()) {
@@ -104,7 +111,7 @@ export default class CommandExecutor {
         let x = this.world.player.x;
         let y = this.world.player.y;
 
-        return x === this.world.finish.x && y === this.world.finish.y
+        return x === this.world.finish.x && y === this.world.finish.y && this.game.score >= 0;
     }
 
     collectItems() {

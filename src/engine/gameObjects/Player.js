@@ -4,6 +4,7 @@ export default class Player extends GameObject {
 
     constructor(options) {
         super('player', options);
+        this.isAlive = true;
     }
 
     getDefaultOptions() {
@@ -11,5 +12,9 @@ export default class Player extends GameObject {
             ...super.getDefaultOptions(),
             z: 1,
         };
+    }
+
+    kill () {
+        this.isAlive = false;
     }
 }

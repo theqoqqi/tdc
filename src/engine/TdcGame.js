@@ -101,6 +101,10 @@ export default class TdcGame {
         this.score += score;
     }
 
+    setScore(score) {
+        this.score = score;
+    }
+
     loadLevelFromJson(level) {
         this.level = level;
 
@@ -109,7 +113,7 @@ export default class TdcGame {
     }
 
     loadDynamicLevelData(level) {
-        this.score = 0;
+        this.setScore(level.initialScore);
         this.world.objects = [];
         this.addObjects(level);
         this.world.addPlayer(level.start.x, level.start.y);
