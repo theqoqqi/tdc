@@ -33,51 +33,42 @@ const level1 = {
         {
             type: 'move',
             steps: [
-                'right',
-                'right',
+                'up',
                 'up-right',
             ]
         },
         {
             type: 'move',
             steps: [
-                'up-left',
-                'down-left',
-                'up-left',
+                'up',
+                'up-right',
             ]
         },
         {
             type: 'move',
             steps: [
-                'up-left',
-                'down-left',
-                'down-left',
-                'up-left',
+                'up',
+                'up-right',
             ]
         },
         {
             type: 'move',
             steps: [
+                'up',
                 'up-right',
-                'right',
             ]
         },
         {
             type: 'move',
             steps: [
-                'right',
-                'right',
-                'down',
-                'down',
-                'up-left',
+                'up',
+                'up-right',
             ]
         },
         {
             type: 'move',
             steps: [
-                'up-right',
-                'up-right',
-                'up-right',
+                'up',
                 'up-right',
             ]
         },
@@ -85,8 +76,67 @@ const level1 = {
             type: 'move',
             steps: [
                 'left',
-                'up-left',
                 'down-left',
+            ]
+        },
+        {
+            type: 'move',
+            steps: [
+                'left',
+                'down-left',
+            ]
+        },
+        {
+            type: 'move',
+            steps: [
+                'left',
+                'down-left',
+            ]
+        },
+        {
+            type: 'move',
+            steps: [
+                'left',
+                'down-left',
+            ]
+        },
+        {
+            type: 'move',
+            steps: [
+                'left',
+                'left',
+                'down-left',
+            ]
+        },
+        {
+            type: 'move',
+            steps: [
+                'left',
+                'left',
+                'down-left',
+            ]
+        },
+        {
+            type: 'move',
+            steps: [
+                'down-right',
+                'down-right',
+            ]
+        },
+        {
+            type: 'move',
+            steps: [
+                'down-right',
+                'down-right',
+            ]
+        },
+        {
+            type: 'move',
+            steps: [
+                'up-right',
+                'up-right',
+                'up-right',
+                'up-right',
             ]
         },
     ]
