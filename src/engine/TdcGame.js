@@ -92,7 +92,7 @@ export default class TdcGame {
 
         for (const objectJson of level.objects) {
             let gameObjectClass = TdcGame.gameObjectClasses[objectJson.className];
-            let object = new gameObjectClass (objectJson);
+            let object = new gameObjectClass(objectJson);
             this.world.objects.push(object);
         }
     }

@@ -19,10 +19,21 @@ Z-координату добавить +
 
 
 
-На однотипные команды нужно сделать счетчик (сколько этих команд) // тут Гоше надо поменять лвл, json файл, тогда я поменяю у себя
+На однотипные команды нужно сделать счетчик (сколько этих команд)
+Разделить логику CommandList и палитры?
 
-Отрефакторить места, где используется object.className:
-object.className === 'item' можно заменить на object instanceof Item и object.collect();
-object.className === 'obstacle' можно заменить на object.isPassable/blocksPassability
+
+Отрефакторить:
+
+места, где используется object.className
+object.className === 'item' можно заменить на object instanceof Item и object.collect(); +
+object.className === 'obstacle' можно заменить на object.isPassable/blocksPassability +
+
+Вынести команды в классы
+
+Отрефакторить файл с геймом
+
 
 В будущем можно добавить вариант записи команд типа 'move right right up-right'
+
+object.collect() - сделать такую функцию в Item??

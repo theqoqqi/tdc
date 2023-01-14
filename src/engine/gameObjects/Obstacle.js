@@ -6,5 +6,8 @@ export default class Obstacle extends GameObject {
         super('obstacle', options);
     }
 
+    get isPassable () {
+        return false;
+    }
 
 }
