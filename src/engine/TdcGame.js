@@ -89,21 +89,10 @@ export default class TdcGame {
         if (!level.objects) {
             return
         }
+
         for (const objectJson of level.objects) {
             let gameObjectClass = TdcGame.gameObjectClasses[objectJson.className];
             let object = new gameObjectClass (objectJson);
-            if (object.type === 'apple') {
-                object.score = 1;
-            }
-            if (object.type === 'green-apple') {
-                object.score = 2;
-            }
-            if (object.type === 'cheese') {
-                object.score = 3;
-            }
-            if (object.type === 'mushroom') {
-                object.score = 4;
-            }
             this.world.objects.push(object);
         }
     }
