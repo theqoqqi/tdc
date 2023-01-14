@@ -4,6 +4,7 @@ import level3 from './levels/level3.js';
 import TdcGame from '../engine/TdcGame.js';
 import WorldRenderer from '../game/WorldRenderer.js';
 import Gui from './gui/Gui.js';
+import AudioController from './AudioController.js';
 
 export default class HtmlTdcGame {
 
@@ -19,7 +20,9 @@ export default class HtmlTdcGame {
         this.game = new TdcGame();
         this.worldRenderer = new WorldRenderer('.world', this);
         this.gui = new Gui(this);
+        this.audio = new AudioController();
 
+        this.audio.waitForInteraction();
         this.loadNextLevel();
 
         setInterval(() => this.update(), 25);
