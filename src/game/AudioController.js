@@ -24,14 +24,14 @@ export default class AudioController {
 
     waitForInteraction() {
         let listener = () => {
-            this.start();
+            this.playRandomBackgroundAudio();
             document.removeEventListener('mousedown', listener);
         };
 
         document.addEventListener('mousedown', listener);
     }
 
-    start() {
+    playRandomBackgroundAudio() {
         let audio = AudioController.#getRandomBackgroundAudio();
 
         this.#setBackgroundAudio(audio);
@@ -44,10 +44,13 @@ export default class AudioController {
     }
 
     #setBackgroundAudio(audio) {
-        this.#backgroundAudio?.stop();
+        this.#backgroundAudio?.pause();
         this.#backgroundAudio = new Audio(audio);
         this.#backgroundAudio.play();
         this.#backgroundAudio.volume = this.#volume;
+        this.#backgroundAudio.addEventListener('ended', e => {
+            this.playRandomBackgroundAudio();
+        });
     }
 
     setVolume(value) {
