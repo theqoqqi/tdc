@@ -37,7 +37,11 @@
     z-index: 1000;
 }
 
-.object-tile.destroyed {
+.world.playing .object-tile.destroyed {
+    animation: destroying 1s;
+}
+
+.world:not(.playing) .object-tile.player.destroyed {
     animation: destroying 1s;
 }
 
