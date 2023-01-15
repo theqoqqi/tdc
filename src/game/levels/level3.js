@@ -76,63 +76,56 @@ const level3 = {
     ],
     commands: [
         {
-            type: 'move',
-            steps: [
-                'up',
-                'up-right',
-                'right',
-                'right',
-                'right',
+            actions: [
+                'move up',
+                'move up-right',
+                'move right',
+                'move right',
+                'move right',
             ],
         },
         {
-            type: 'move',
-            steps: [
-                'up-right',
-                'up-right',
-                'up',
-                'up',
-                'down',
+            actions: [
+                'move up-right',
+                'move up-right',
+                'move up',
+                'move up',
+                'move down',
             ],
         },
         {
-            type: 'move',
-            steps: [
-                'down',
-                'down',
-                'down-left',
-                'down-right',
-                'down-left',
+            actions: [
+                'move down',
+                'move down',
+                'move down-left',
+                'move down-right',
+                'move down-left',
             ],
         },
         {
-            type: 'move',
-            steps: [
-                'left',
-                'up',
-                'up',
-                'up',
+            actions: [
+                'move left',
+                'move up',
+                'move up',
+                'move up',
             ],
         },
         {
-            type: 'move',
-            steps: [
-                'up',
-                'left',
+            actions: [
+                'move up',
+                'move left',
             ],
         },
         {
-            type: 'move',
-            steps: [
-                'up-left',
-                'up-left',
+            actions: [
+                'move up-left',
+                'move up-left',
             ],
         },
         {
-            type: 'move',
-            steps: [
-                'down-left',
-                'down',
+            actions: [
+                'move down-left',
+                'move down',
             ],
         },
     ],

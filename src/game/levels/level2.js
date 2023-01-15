@@ -32,45 +32,40 @@ const level1 = {
     ],
     commands: [
         {
-            type: 'move',
-            steps: [
-                'up',
-                'up-right',
+            actions: [
+                'move up',
+                'move up-right',
             ],
             count: 6,
         },
         {
-            type: 'move',
-            steps: [
-                'left',
-                'down-left',
+            actions: [
+                'move left',
+                'move down-left',
             ],
             count: 4,
         },
         {
-            type: 'move',
-            steps: [
-                'left',
-                'left',
-                'down-left',
+            actions: [
+                'move left',
+                'move left',
+                'move down-left',
             ],
             count: 2,
         },
         {
-            type: 'move',
-            steps: [
-                'down-right',
-                'down-right',
+            actions: [
+                'move down-right',
+                'move down-right',
             ],
             count: 2,
         },
         {
-            type: 'move',
-            steps: [
-                'up-right',
-                'up-right',
-                'up-right',
-                'up-right',
+            actions: [
+                'move up-right',
+                'move up-right',
+                'move up-right',
+                'move up-right',
             ]
         },
     ]
