@@ -1,5 +1,6 @@
 import Item from "../gameObjects/Item.js";
 import Command from "./Command.js";
+import Action from "./actions/Action.js";
 
 export default class CommandExecutor {
 
@@ -20,11 +21,11 @@ export default class CommandExecutor {
         for (const command of commands) {
             for (const action of command.getActions()) {
                 if (!this.game.isPlaying) {
-                    return Command.STOP_REASON_GENERIC;
+                    return Action.STOP_REASON_GENERIC;
                 }
 
                 if (runId !== this.currentRunId) {
-                    return Command.STOP_REASON_GENERIC;
+                    return Action.STOP_REASON_GENERIC;
                 }
 
                 let result = action.execute();
@@ -37,7 +38,7 @@ export default class CommandExecutor {
 
                 if (this.isLevelDone()) {
                     this.game.setLevelDone(true);
-                    return Command.STOP_REASON_GENERIC;
+                    return Action.STOP_REASON_GENERIC;
                 }
 
                 await this.sleep(500);

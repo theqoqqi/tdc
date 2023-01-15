@@ -1,5 +1,4 @@
 import Action from "./Action.js";
-import Command from "../Command.js";
 
 export default class MoveAction extends Action{
 
@@ -10,13 +9,13 @@ export default class MoveAction extends Action{
 
     execute () {
         if (this.game.score - 1 < 0) {
-            return Command.STOP_REASON_GENERIC;
+            return Action.STOP_REASON_GENERIC;
         }
 
         if (!this.shouldMove(this.direction)) {
             this.move(this.direction, 0.3);
             this.game.world.player.kill();
-            return Command.STOP_REASON_GENERIC;
+            return Action.STOP_REASON_GENERIC;
         }
 
         this.move(this.direction);
@@ -24,7 +23,7 @@ export default class MoveAction extends Action{
     }
 
     move(direction, distance = 1) {
-        let delta = Command.directionDeltas[direction];
+        let delta = Action.directionDeltas[direction];
 
         this.world.player.x += delta.dx * distance;
         this.world.player.y += delta.dy * distance;
@@ -33,7 +32,7 @@ export default class MoveAction extends Action{
     shouldMove(direction) {
         let x = this.world.player.x;
         let y = this.world.player.y;
-        let delta = Command.directionDeltas[direction];
+        let delta = Action.directionDeltas[direction];
         let isTargetPassable = this.world.isCellPassable(x + delta.dx, y + delta.dy);
 
         if (delta.x !== 0 && delta.y !== 0) {
