@@ -1,5 +1,6 @@
 import Player from "./gameObjects/Player.js";
 import Finish from "./gameObjects/Finish.js";
+import Item from "./gameObjects/Item.js";
 
 export default class World {
 
@@ -45,12 +46,13 @@ export default class World {
         if (!this.isInBounds(x, y)) {
             return false
         }
-        for (const object of this.objects) {
-            if (object.className === 'obstacle' && x === object.x && y === object.y) {
-                return false
-            }
+
+        let object = this.getObjectAt(x, y);
+
+        if (!object) {
+            return true;
         }
-        return true
+        return object.isPassable;
     }
 
     removeObject(object) {
@@ -60,5 +62,14 @@ export default class World {
 
     addObject(object) {
         this.objects.push(object);
+    }
+
+    getObjectAt(x, y) {
+        for (const object of this.objects) {
+            if (x === object.x && y === object.y) {
+                return object;
+            }
+        }
+        return null;
     }
 }

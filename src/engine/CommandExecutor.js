@@ -1,3 +1,5 @@
+import Item from "./gameObjects/Item.js";
+
 export default class CommandExecutor {
 
     constructor(game) {
@@ -65,7 +67,7 @@ export default class CommandExecutor {
                     return;
                 }
 
-                if (this.game.score -1 < 0) {
+                if (this.game.score - 1 < 0) {
                     return;
                 }
 
@@ -117,13 +119,11 @@ export default class CommandExecutor {
     collectItems() {
         let x = this.world.player.x;
         let y = this.world.player.y;
+        let object = this.world.getObjectAt(x,y);
 
-        for (const object of this.world.objects) {
-            if (x === object.x && y === object.y && object.className === 'item') {
-                this.game.addScore(object.score);
-                this.world.removeObject(object);
-            }
+        if (object instanceof Item) {
+            this.game.addScore(object.score);
+            this.world.removeObject(object);
         }
     }
-
 }

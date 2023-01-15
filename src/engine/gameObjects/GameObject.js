@@ -22,4 +22,8 @@ export default class GameObject {
             variant: null,
         }
     }
+
+    get isPassable () {
+        return true;
+    }
 }
