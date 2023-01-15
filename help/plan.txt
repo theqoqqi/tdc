@@ -19,6 +19,7 @@ Z-координату добавить +
 Рефакторинг:
 object.className === 'item' можно заменить на object instanceof Item и object.collect(); +
 object.className === 'obstacle' можно заменить на object.isPassable/blocksPassability +
+Вынести команды в классы+
  __________________________________________________________________________________________
 
 На однотипные команды нужно сделать счетчик (сколько этих команд) // upd задача ждет рефактор кода
@@ -26,10 +27,9 @@ object.className === 'obstacle' можно заменить на object.isPassab
 
 
 Отрефакторить:
-Вынести команды в классы
-Отрефакторить файл с геймом
+Отрефакторить файл с геймом - нужен level loader
 
 
 
 
-object.collect() - сделать такую функцию в Item??
+object.collect() - сделать такую функцию в Item??// скорее всего стоит вынести collectItems из CommandExecutor
