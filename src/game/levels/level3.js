@@ -86,15 +86,6 @@ const level3 = {
         },
         {
             actions: [
-                'move up-right',
-                'move up-right',
-                'move up',
-                'move up',
-                'move down',
-            ],
-        },
-        {
-            actions: [
                 'move down',
                 'move down',
                 'move down-left',
@@ -104,28 +95,37 @@ const level3 = {
         },
         {
             actions: [
-                'move left',
-                'move up',
-                'move up',
-                'move up',
-            ],
-        },
-        {
-            actions: [
-                'move up',
-                'move left',
-            ],
-        },
-        {
-            actions: [
-                'move up-left',
-                'move up-left',
-            ],
-        },
-        {
-            actions: [
                 'move down-left',
                 'move down',
+            ],
+        },
+        {
+            actions: [
+                'move up-right',
+                'move up-right',
+                'move up',
+                'move up',
+                'move down',
+            ],
+        },
+        {
+            actions: [
+                'move up-left',
+                'move up-left',
+            ],
+        },
+        {
+            actions: [
+                'move left',
+                'move up',
+                'move up',
+                'move up',
+            ],
+        },
+        {
+            actions: [
+                'move up',
+                'move left',
             ],
         },
     ],
