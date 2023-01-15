@@ -28,7 +28,7 @@ function parseCommand(string) {
             args = args[0].split('');
         }
 
-        command.steps = args.map(step => {
+        command.actions = args.map(step => {
             let mapping = {
                 1: 'down-left',
                 2: 'down',

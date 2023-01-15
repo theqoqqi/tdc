@@ -6,9 +6,9 @@ for (const command of unusedCommands) {
     let icon = getIcon(command.type);
 
     if (command.type === 'move') {
-        let steps = command.steps;
+        let actions = command.actions;
 
-        for (const step of steps) {
+        for (const step of actions) {
             renderStep(step.direction);
         }
     }
@@ -26,9 +26,9 @@ for (const command of usedCommands) {
     let icon = getIcon(command.type);
 
     if (command.type === 'move') {
-        let steps = command.steps;
+        let actions = command.actions;
 
-        for (const step of steps) {
+        for (const step of actions) {
             renderStep(step.direction);
         }
     }

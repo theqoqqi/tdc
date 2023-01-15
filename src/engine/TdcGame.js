@@ -1,10 +1,11 @@
 import World from '../engine/World.js';
-import CommandList from '../engine/CommandList.js';
-import CommandExecutor from '../engine/CommandExecutor.js';
+import CommandList from './commands/CommandList.js';
+import CommandExecutor from './commands/CommandExecutor.js';
 import Item from "./gameObjects/Item.js";
 import Obstacle from "./gameObjects/Obstacle.js";
 import Finish from "./gameObjects/Finish.js";
 import Player from "./gameObjects/Player.js";
+import Command from "./commands/Command.js";
 
 export default class TdcGame {
 
@@ -39,12 +40,9 @@ export default class TdcGame {
     }
 
     addCommands(level) {
-        for (const command of level.commands) {
-            let steps = command.steps;
-            command.steps = [];
-            for (let i = 0; i < steps.length; i++) {
-                command.steps.push({direction: steps[i]});
-            }
+        for (const commandJson of level.commands) {
+            let command = new Command(this, commandJson);
+
             this.unusedCommandsList.addCommand(command);
         }
     }
