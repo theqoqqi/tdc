@@ -1,34 +1,23 @@
 import World from '../engine/World.js';
 import CommandList from './commands/CommandList.js';
 import CommandExecutor from './commands/CommandExecutor.js';
-import Item from "./gameObjects/Item.js";
-import Obstacle from "./gameObjects/Obstacle.js";
-import Finish from "./gameObjects/Finish.js";
-import Player from "./gameObjects/Player.js";
-import Command from "./commands/Command.js";
+import LevelLoader from "./LevelLoader.js";
 
 export default class TdcGame {
-
-    static gameObjectClasses = {
-        player: Player,
-        finish: Finish,
-        item: Item,
-        obstacle: Obstacle,
-    };
 
     constructor() {
         this.world = new World();
         this.unusedCommandsList = new CommandList();
         this.usedCommandsList = new CommandList();
         this.commandExecutor = new CommandExecutor(this);
-        this.level = null;
+        this.levelLoader = new LevelLoader(this);
         this.isPlaying = false;
         this.isLevelDone = false;
         this.score = 0;
     }
 
-    setWorldSize(width, height) {
-        this.world.setWorldSize(width, height);
+    loadLevelFromJson(level) {
+        return this.levelLoader.loadLevelFromJson(level);
     }
 
     getUnusedCommands() {
@@ -39,13 +28,6 @@ export default class TdcGame {
         return this.usedCommandsList.getAllCommands();
     }
 
-    addCommands(level) {
-        for (const commandJson of level.commands) {
-            let command = new Command(this, commandJson);
-
-            this.unusedCommandsList.addCommand(command);
-        }
-    }
 
     addCommand(command, index = undefined) {
         this.usedCommandsList.addCommand(command, index);
@@ -66,13 +48,9 @@ export default class TdcGame {
         this.commandExecutor.run();
     }
 
-    isInBounds(x, y) {
-        return this.world.isInBounds(x, y);
-    }
-
     stop() {
         this.isPlaying = false;
-        this.loadDynamicLevelData(this.level);
+        this.levelLoader.restoreLevel();
     }
 
     setLevelDone(bool) {
@@ -83,47 +61,11 @@ export default class TdcGame {
         this.isPlaying = bool;
     }
 
-    addObjects(level) {
-        if (!level.objects) {
-            return
-        }
-
-        for (const objectJson of level.objects) {
-            let gameObjectClass = TdcGame.gameObjectClasses[objectJson.className];
-            let object = new gameObjectClass(objectJson);
-            this.world.objects.push(object);
-        }
-    }
-
     addScore(score) {
         this.score += score;
     }
 
     setScore(score) {
         this.score = score;
-    }
-
-    loadLevelFromJson(level) {
-        this.level = level;
-
-        this.loadStaticLevelData(level);
-        this.loadDynamicLevelData(level);
-    }
-
-    loadDynamicLevelData(level) {
-        this.setScore(level.initialScore);
-        this.world.objects = [];
-        this.addObjects(level);
-        this.world.addPlayer(level.start.x, level.start.y);
-        this.world.addFinish(level.finish.x, level.finish.y);
-    }
-
-    loadStaticLevelData(level) {
-        this.setPlaying(false);
-        this.setLevelDone(false);
-        this.usedCommandsList.commands = [];
-        this.unusedCommandsList.commands = [];
-        this.setWorldSize(level.width, level.height);
-        this.addCommands(level);
     }
 }
