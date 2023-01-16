@@ -21,6 +21,10 @@ export default class CommandPalette {
         this.commands.set(command, count + modifyBy);
     }
 
+    hasCommand(command) {
+        return this.commands.get(command) > 0;
+    }
+
     getCommands() {
         return Array.from(this.commands.keys());
     }
