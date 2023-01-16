@@ -2,12 +2,13 @@ import World from '../engine/World.js';
 import CommandList from './commands/CommandList.js';
 import CommandExecutor from './commands/CommandExecutor.js';
 import LevelLoader from "./LevelLoader.js";
+import CommandPalette from "./commands/CommandPalette.js";
 
 export default class TdcGame {
 
     constructor() {
         this.world = new World();
-        this.unusedCommandsList = new CommandList();
+        this.commandPalette = new CommandPalette();
         this.usedCommandsList = new CommandList();
         this.commandExecutor = new CommandExecutor(this);
         this.levelLoader = new LevelLoader(this);
@@ -20,23 +21,22 @@ export default class TdcGame {
         return this.levelLoader.loadLevelFromJson(level);
     }
 
-    getUnusedCommands() {
-        return this.unusedCommandsList.getAllCommands();
+    getCommandPalette() {
+        return this.commandPalette.getCommands();
     }
 
     getUsedCommands() {
         return this.usedCommandsList.getAllCommands();
     }
 
-
     addCommand(command, index = undefined) {
         this.usedCommandsList.addCommand(command, index);
-        this.unusedCommandsList.removeCommand(command);
+        this.commandPalette.takeCommand(command);
     }
 
-    removeCommand(command, index = undefined) {
+    removeCommand(command) {
         this.usedCommandsList.removeCommand(command);
-        this.unusedCommandsList.addCommand(command, index);
+        this.commandPalette.putCommand(command);
     }
 
     reorderCommand(command, toIndex) {

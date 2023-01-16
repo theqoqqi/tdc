@@ -79,7 +79,7 @@ export default class Gui {
     }
 
     #addCommand(unusedCommandIndex, usedCommandIndex = null) {
-        let unusedCommands = this.game.getUnusedCommands();
+        let unusedCommands = this.game.getCommandPalette();
         let command = unusedCommands[unusedCommandIndex];
 
         this.game.addCommand(command, usedCommandIndex);
@@ -117,7 +117,7 @@ export default class Gui {
     }
 
     fillCommands() {
-        for (const command of this.game.getUnusedCommands()) {
+        for (const command of this.game.getCommandPalette()) {
             this.addUnusedCommand(command);
         }
     }

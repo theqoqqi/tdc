@@ -38,7 +38,7 @@ export default class LevelLoader {
         this.game.setPlaying(false);
         this.game.setLevelDone(false);
         this.game.usedCommandsList.commands = [];
-        this.game.unusedCommandsList.commands = [];
+        this.game.commandPalette.clear();
         this.world.setWorldSize(level.width, level.height);
         this.addCommands(level);
     }
@@ -51,7 +51,7 @@ export default class LevelLoader {
         for (const commandJson of level.commands) {
             let command = new Command(this.game, commandJson);
 
-            this.game.unusedCommandsList.addCommand(command);
+            this.game.commandPalette.addCommand(command, commandJson.count);
         }
     }
 
