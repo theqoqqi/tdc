@@ -18,7 +18,9 @@ export default class Gui {
             group: {
                 name: 'commands',
                 put: true,
+                pull: 'clone',
             },
+            onAdd: e => $(e.item).remove(),
             animation: 150,
             sort: false,
         });
@@ -27,7 +29,7 @@ export default class Gui {
             group: 'commands',
             animation: 150,
             onAdd: e => this.#addCommand(e.oldIndex, e.newIndex),
-            onRemove: e => this.#removeCommand(e.oldIndex, e.newIndex),
+            onRemove: e => this.#removeCommand(e.oldIndex),
             onUpdate: e => this.#reorderCommand(e.oldIndex, e.newIndex),
         });
 
@@ -38,8 +40,14 @@ export default class Gui {
 
             let $command = $(e.currentTarget);
             let index = $command.index();
+            let unusedCommands = this.game.getPaletteCommands();
+            let command = unusedCommands[index];
 
-            this.$usedCommands.append($command);
+            if (!this.game.commandPalette.hasCommand(command)) {
+                return;
+            }
+
+            this.$usedCommands.append($command.clone());
             this.#addCommand(index);
         });
 
@@ -51,7 +59,7 @@ export default class Gui {
             let $command = $(e.currentTarget);
             let index = $command.index();
 
-            this.$unusedCommands.append($command);
+            $command.remove();
             this.#removeCommand(index);
         });
 
@@ -82,21 +90,19 @@ export default class Gui {
         let unusedCommands = this.game.getPaletteCommands();
         let command = unusedCommands[unusedCommandIndex];
 
+        if (!this.game.commandPalette.hasCommand(command)) {
+            return;
+        }
+
         this.game.addCommand(command, usedCommandIndex);
     }
 
-    #removeCommand(usedCommandIndex, unusedCommandIndex = null) {
-        let usedCommands = this.game.getUsedCommands();
-        let command = usedCommands[usedCommandIndex];
-
-        this.game.removeCommand(command, unusedCommandIndex);
+    #removeCommand(usedCommandIndex) {
+        this.game.removeCommand(usedCommandIndex);
     }
 
     #reorderCommand(fromIndex, toIndex) {
-        let usedCommands = this.game.getUsedCommands();
-        let command = usedCommands[fromIndex];
-
-        this.game.reorderCommand(command, toIndex);
+        this.game.reorderCommand(fromIndex, toIndex);
     }
 
     update() {
@@ -106,6 +112,12 @@ export default class Gui {
 
         if (this.game.isLevelDone !== this.isLevelDone) {
             this.setLevelDone(this.game.isLevelDone);
+        }
+
+        for (const command of this.game.getPaletteCommands()) {
+            let currentCount = this.game.commandPalette.getCommandCount(command);
+
+            this.setCommandCountInPalette(command, currentCount);
         }
 
         this.setScore(this.game.score);
@@ -118,7 +130,9 @@ export default class Gui {
 
     fillCommands() {
         for (const command of this.game.getPaletteCommands()) {
-            this.addUnusedCommand(command);
+            let count = this.game.commandPalette.getCommandCount(command);
+
+            this.addUnusedCommand(command, count);
         }
     }
 
@@ -127,10 +141,22 @@ export default class Gui {
         this.$usedCommands.empty();
     }
 
-    addUnusedCommand(command) {
-        let $command = CommandElementFactory.create(command);
+    addUnusedCommand(command, count) {
+        let $command = CommandElementFactory.create(command, count);
 
         this.$unusedCommands.append($command);
+    }
+
+    setCommandCountInPalette(command, count) {
+        let paletteCommands = this.game.getPaletteCommands();
+        let indexInPalette = paletteCommands.indexOf(command);
+        let $command = this.$unusedCommands.find('.command').eq(indexInPalette);
+        let $count = $command.find('.count');
+        let countFromText = +$count.text();
+
+        if (countFromText !== count) {
+            $count.text(count);
+        }
     }
 
     play() {

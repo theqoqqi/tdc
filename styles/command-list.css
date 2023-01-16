@@ -10,7 +10,7 @@
 .command {
     display: flex;
     align-items: center;
-    gap: 4px;
+    justify-content: space-between;
 
     width: 160px;
     height: 32px;
@@ -24,6 +24,24 @@
 
 .command:hover {
     filter: sepia(1);
+}
+
+.command .actions {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.command .count {
+    font-weight: 800;
+}
+
+.unused-commands .command.sortable-ghost {
+    display: none;
+}
+
+.used-commands .command .count {
+    display: none;
 }
 
 .command-icon {

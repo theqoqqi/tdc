@@ -51,7 +51,7 @@ export default class LevelLoader {
         for (const commandJson of level.commands) {
             let command = new Command(this.game, commandJson);
 
-            this.game.commandPalette.addCommand(command, commandJson.count);
+            this.game.commandPalette.addCommand(command, commandJson.count ?? 1);
         }
     }
 

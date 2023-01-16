@@ -11,17 +11,31 @@ export default class CommandElementFactory {
         },
     };
 
-    static create(command) {
-        let $command = $(`<div class='command'>`);
+    static create(command, count) {
+        let $command = $(`
+            <div class='command'>
+                <div class='actions'></div>
+                <span class='count'>1</span>
+            </div>
+        `);
+        let $actions = $command.find('.actions');
+        let $count = $command.find('.count');
 
         for (const action of command.actions) {
             let actionType = this.getActionType(action);
-            let renderer = this.#actionRenderers[actionType] ?? this.#defaultActionRenderer;
+            let renderer = this.getActionRenderer(actionType);
+            let $action = $(renderer(action, actionType));
 
-            $command.append($(renderer(action, actionType)));
+            $actions.append($action);
         }
 
+        $count.text(count);
+
         return $command;
+    }
+
+    static getActionRenderer(actionType) {
+        return this.#actionRenderers[actionType] ?? this.#defaultActionRenderer;
     }
 
     static getActionType(action) {

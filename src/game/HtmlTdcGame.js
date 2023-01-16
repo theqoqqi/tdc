@@ -25,6 +25,8 @@ export default class HtmlTdcGame {
         this.audio.waitForInteraction();
         this.loadNextLevel();
 
+        window.htmlGame = this;
+
         setInterval(() => this.update(), 25);
     }
 
