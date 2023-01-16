@@ -1,6 +1,6 @@
 
 
-let unusedCommands = game.getCommandPalette(); // Получить список доступных команд на текущем уровне (использованные команды должны пропадать из списка)
+let unusedCommands = game.getPaletteCommands(); // Получить список доступных команд на текущем уровне (использованные команды должны пропадать из списка)
 
 for (const command of unusedCommands) {
     let icon = getIcon(command.type);

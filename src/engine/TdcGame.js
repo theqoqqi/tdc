@@ -21,7 +21,7 @@ export default class TdcGame {
         return this.levelLoader.loadLevelFromJson(level);
     }
 
-    getCommandPalette() {
+    getPaletteCommands() {
         return this.commandPalette.getCommands();
     }
 
