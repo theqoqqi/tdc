@@ -34,13 +34,13 @@ export default class TdcGame {
         this.commandPalette.takeCommand(command);
     }
 
-    removeCommand(command) {
-        this.usedCommandsList.removeCommand(command);
+    removeCommand(index) {
+        let command = this.usedCommandsList.removeCommand(index);
         this.commandPalette.putCommand(command);
     }
 
-    reorderCommand(command, toIndex) {
-        this.usedCommandsList.reorderCommand(command, toIndex);
+    reorderCommand(fromIndex, toIndex) {
+        this.usedCommandsList.reorderCommand(fromIndex, toIndex);
     }
 
     play() {

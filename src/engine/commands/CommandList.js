@@ -20,13 +20,15 @@ export default class CommandList {
         }
     }
 
-    removeCommand(command) {
-        let index = this.commands.indexOf(command);
+    removeCommand(index) {
+        let command = this.commands[index];
         this.commands.splice (index, 1);
+        return command;
     }
 
-    reorderCommand(command, toIndex) {
-        this.removeCommand(command);
+    reorderCommand(fromIndex, toIndex) {
+        let command = this.commands[fromIndex];
+        this.removeCommand(fromIndex);
         this.addCommand(command, toIndex);
     }
 }
