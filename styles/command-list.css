@@ -36,11 +36,11 @@
     font-weight: 800;
 }
 
-.unused-commands .command.sortable-ghost {
+.palette-commands .command.sortable-ghost {
     display: none;
 }
 
-.used-commands .command .count {
+.program-commands .command .count {
     display: none;
 }
 

@@ -1,8 +1,8 @@
 
 
-let unusedCommands = game.getPaletteCommands(); // Получить список доступных команд на текущем уровне (использованные команды должны пропадать из списка)
+let paletteCommands = game.getPaletteCommands(); // Получить список доступных команд на текущем уровне (использованные команды должны пропадать из списка)
 
-for (const command of unusedCommands) {
+for (const command of paletteCommands) {
     let icon = getIcon(command.type);
 
     if (command.type === 'move') {
@@ -20,9 +20,9 @@ for (const command of unusedCommands) {
 
 
 
-let usedCommands = game.getUsedCommands(); // Получить список команд, которые уже использованы
+let programCommands = game.getProgramCommands(); // Получить список команд, которые уже использованы
 
-for (const command of usedCommands) {
+for (const command of programCommands) {
     let icon = getIcon(command.type);
 
     if (command.type === 'move') {

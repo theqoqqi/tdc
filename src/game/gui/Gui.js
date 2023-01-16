@@ -5,8 +5,8 @@ export default class Gui {
     constructor(htmlGame) {
         this.htmlGame = htmlGame;
         this.game = htmlGame.game;
-        this.$unusedCommands = $('.unused-commands');
-        this.$usedCommands = $('.used-commands');
+        this.$paletteCommands = $('.palette-commands');
+        this.$programCommands = $('.program-commands');
         this.$playButton = $('.play-button');
         this.$stopButton = $('.stop-button');
         this.$nextLevelButton = $('.next-level-button');
@@ -14,7 +14,7 @@ export default class Gui {
         this.isPlaying = false;
         this.isLevelDone = false;
 
-        this.unusedCommandsSortable = new Sortable(this.$unusedCommands[0], {
+        this.paletteCommandsSortable = new Sortable(this.$paletteCommands[0], {
             group: {
                 name: 'commands',
                 put: true,
@@ -25,7 +25,7 @@ export default class Gui {
             sort: false,
         });
 
-        this.usedCommandsSortable = new Sortable(this.$usedCommands[0], {
+        this.programCommandsSortable = new Sortable(this.$programCommands[0], {
             group: 'commands',
             animation: 150,
             onAdd: e => this.#addCommand(e.oldIndex, e.newIndex),
@@ -33,25 +33,25 @@ export default class Gui {
             onUpdate: e => this.#reorderCommand(e.oldIndex, e.newIndex),
         });
 
-        this.$unusedCommands.on('click', '.command', e => {
+        this.$paletteCommands.on('click', '.command', e => {
             if (this.isPlaying) {
                 return;
             }
 
             let $command = $(e.currentTarget);
             let index = $command.index();
-            let unusedCommands = this.game.getPaletteCommands();
-            let command = unusedCommands[index];
+            let paletteCommands = this.game.getPaletteCommands();
+            let command = paletteCommands[index];
 
             if (!this.game.commandPalette.hasCommand(command)) {
                 return;
             }
 
-            this.$usedCommands.append($command.clone());
+            this.$programCommands.append($command.clone());
             this.#addCommand(index);
         });
 
-        this.$usedCommands.on('click', '.command', e => {
+        this.$programCommands.on('click', '.command', e => {
             if (this.isPlaying) {
                 return;
             }
@@ -86,19 +86,19 @@ export default class Gui {
         this.setScore(0);
     }
 
-    #addCommand(unusedCommandIndex, usedCommandIndex = null) {
-        let unusedCommands = this.game.getPaletteCommands();
-        let command = unusedCommands[unusedCommandIndex];
+    #addCommand(paletteCommandIndex, programCommandIndex = null) {
+        let paletteCommands = this.game.getPaletteCommands();
+        let command = paletteCommands[paletteCommandIndex];
 
         if (!this.game.commandPalette.hasCommand(command)) {
             return;
         }
 
-        this.game.addCommand(command, usedCommandIndex);
+        this.game.addCommand(command, programCommandIndex);
     }
 
-    #removeCommand(usedCommandIndex) {
-        this.game.removeCommand(usedCommandIndex);
+    #removeCommand(programCommandIndex) {
+        this.game.removeCommand(programCommandIndex);
     }
 
     #reorderCommand(fromIndex, toIndex) {
@@ -132,25 +132,25 @@ export default class Gui {
         for (const command of this.game.getPaletteCommands()) {
             let count = this.game.commandPalette.getCommandCount(command);
 
-            this.addUnusedCommand(command, count);
+            this.addUnprogramCommand(command, count);
         }
     }
 
     clearCommands() {
-        this.$unusedCommands.empty();
-        this.$usedCommands.empty();
+        this.$paletteCommands.empty();
+        this.$programCommands.empty();
     }
 
-    addUnusedCommand(command, count) {
+    addUnprogramCommand(command, count) {
         let $command = CommandElementFactory.create(command, count);
 
-        this.$unusedCommands.append($command);
+        this.$paletteCommands.append($command);
     }
 
     setCommandCountInPalette(command, count) {
         let paletteCommands = this.game.getPaletteCommands();
         let indexInPalette = paletteCommands.indexOf(command);
-        let $command = this.$unusedCommands.find('.command').eq(indexInPalette);
+        let $command = this.$paletteCommands.find('.command').eq(indexInPalette);
         let $count = $command.find('.count');
         let countFromText = +$count.text();
 
@@ -177,8 +177,8 @@ export default class Gui {
         this.isPlaying = isPlaying;
         this.$playButton.toggle(!isPlaying);
         this.$stopButton.toggle(isPlaying);
-        this.unusedCommandsSortable.option('disabled', isPlaying);
-        this.usedCommandsSortable.option('disabled', isPlaying);
+        this.paletteCommandsSortable.option('disabled', isPlaying);
+        this.programCommandsSortable.option('disabled', isPlaying);
     }
 
     setLevelDone(isLevelDone) {

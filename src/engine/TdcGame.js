@@ -9,7 +9,7 @@ export default class TdcGame {
     constructor() {
         this.world = new World();
         this.commandPalette = new CommandPalette();
-        this.usedCommandsList = new CommandList();
+        this.programCommandsList = new CommandList();
         this.commandExecutor = new CommandExecutor(this);
         this.levelLoader = new LevelLoader(this);
         this.isPlaying = false;
@@ -25,22 +25,22 @@ export default class TdcGame {
         return this.commandPalette.getCommands();
     }
 
-    getUsedCommands() {
-        return this.usedCommandsList.getAllCommands();
+    getProgramCommands() {
+        return this.programCommandsList.getAllCommands();
     }
 
     addCommand(command, index = undefined) {
-        this.usedCommandsList.addCommand(command, index);
+        this.programCommandsList.addCommand(command, index);
         this.commandPalette.takeCommand(command);
     }
 
     removeCommand(index) {
-        let command = this.usedCommandsList.removeCommand(index);
+        let command = this.programCommandsList.removeCommand(index);
         this.commandPalette.putCommand(command);
     }
 
     reorderCommand(fromIndex, toIndex) {
-        this.usedCommandsList.reorderCommand(fromIndex, toIndex);
+        this.programCommandsList.reorderCommand(fromIndex, toIndex);
     }
 
     play() {

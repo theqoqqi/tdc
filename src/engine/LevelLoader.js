@@ -37,7 +37,7 @@ export default class LevelLoader {
     loadStaticLevelData(level) {
         this.game.setPlaying(false);
         this.game.setLevelDone(false);
-        this.game.usedCommandsList.commands = [];
+        this.game.programCommandsList.commands = [];
         this.game.commandPalette.clear();
         this.world.setWorldSize(level.width, level.height);
         this.addCommands(level);

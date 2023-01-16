@@ -16,7 +16,7 @@ export default class CommandExecutor {
 
     async run() {
         let runId = ++this.currentRunId;
-        let commands = this.game.getUsedCommands();
+        let commands = this.game.getProgramCommands();
 
         for (const command of commands) {
             for (const action of command.getActions()) {
