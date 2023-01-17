@@ -39,7 +39,12 @@ export default class SpriteAtlases {
             },
         },
         chest: {
-            wooden: SpriteAtlases.#createObjectAtlas('chests/wooden'),
+            wooden: SpriteAtlases.#createObjectAtlas('chests/wooden', {
+                spriteWidth: 64,
+                spriteHeight: 64,
+                columns: 7,
+                rows: 4,
+            }),
         },
     };
 
