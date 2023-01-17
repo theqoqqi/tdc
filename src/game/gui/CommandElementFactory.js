@@ -9,6 +9,12 @@ export default class CommandElementFactory {
         'move': (action) => {
             return `<div class='command-icon step-arrow arrow-${action.direction}'>`
         },
+        'attack': (action) => {
+            return `<div class='command-icon attack-arrow arrow-${action.direction}'>`
+        },
+        'use': (action) => {
+            return `<div class='command-icon use-arrow arrow-${action.direction}'>`
+        },
     };
 
     static create(command, count) {
