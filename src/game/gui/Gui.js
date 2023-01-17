@@ -132,7 +132,7 @@ export default class Gui {
         for (const command of this.game.getPaletteCommands()) {
             let count = this.game.commandPalette.getCommandCount(command);
 
-            this.addUnprogramCommand(command, count);
+            this.addProgramCommand(command, count);
         }
     }
 
@@ -141,7 +141,7 @@ export default class Gui {
         this.$programCommands.empty();
     }
 
-    addUnprogramCommand(command, count) {
+    addProgramCommand(command, count) {
         let $command = CommandElementFactory.create(command, count);
 
         this.$paletteCommands.append($command);
