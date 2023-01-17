@@ -38,6 +38,9 @@ export default class SpriteAtlases {
                 monument: SpriteAtlases.#createObjectAtlas('obstacles/graves/monument'),
             },
         },
+        chest: {
+            wooden: SpriteAtlases.#createObjectAtlas('chests/wooden'),
+        },
     };
 
     static get grassAtlas() {
